@@ -1,0 +1,12 @@
+<% title "Sentences" %>
+
+<div id='search' style='float:right;'>
+<% form_tag(sentences_path, :method => 'GET') do %>
+<%= text_field_tag :search %>
+<%= submit_tag('Search') %>
+<% end %>
+</div>
+
+<%= render :partial => 'sentences' %>
+
+<p><%= link_to "New Sentence", new_sentence_path %></p>

@@ -1,0 +1,184 @@
+td#audio {
+  width: 80%
+}
+
+
+div#user_nav { float: right; font-size: 0.9em; }
+ol.formList
+{
+list-style-type:none;
+}
+
+
+h2 {
+  text-align: center;
+}
+
+p#exercise_example {
+  font-size: 22px;
+  height: auto;
+}
+
+p#exercise_question {
+  font-size: 22px;
+  height: auto;
+}
+
+
+input {
+  background-colour: #303030;
+  border-colour: #000
+  color: #fff;
+}
+
+textarea {
+    background-color: #a0a0a0;
+    border-color: #000
+}
+
+#sentence_content {
+  font-size: 32px;
+  width: 100%;
+  height: 200px;
+}
+
+#sentence_translation_attributes__content {
+  width: 100%;
+  height: 60px;
+}
+#adjective_translations__content {
+  width: 60%;
+  height: 30px;
+}
+#exercise_example {
+
+  font-size: 22px;
+  width: 80%;
+  height: 120px;
+}
+
+#exercise_questions__content {
+  width: 60%;
+  height: 60px;
+  font-size: 22px;
+}
+#exercise_questions__correct_answer {
+  width: 60%;
+  height: 60px;
+  font-size: 22px;
+}
+
+#dialog_dsentences__content {
+  width: 80%;
+  height: 100px;
+  font-size: 32px;
+}
+#dialog_dsentences__person {
+  width: 80px;
+  height: 20px;
+}
+#dialog_dsentences__no {
+  width: 20px;
+  height: 20px;
+}
+
+tr.dialog {
+  font-size: 22px;
+}
+
+tr.dialog > td.person {
+  width: auto;
+  text-align: right;
+}
+
+tr.dialog td.separator {
+  width: 20px;
+}
+
+body {
+  background-color: #000;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 14px;
+  color: #AAA;
+}
+
+a img {
+  border: none;
+}
+
+a {
+  color: #0000FF;
+}
+
+a:link {text-decoration: none}
+a:visited {text-decoration: none}
+a:active {text-decoration: none}
+a:hover {text-decoration: underline; color: red;}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+#container {
+  width: 75%;
+  margin: 0 auto;
+  background-color: #400;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px;
+}
+
+#flash_notice, #flash_error {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+#flash_error {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 8px;
+}
+
+#errorExplanation ul {
+  margin: 2px 24px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}

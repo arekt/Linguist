@@ -1,0 +1,23 @@
+<p>
+  <b>Sentence:</b>
+  <%=h @fragment.sentence.content %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%=h @fragment.start %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%=h @fragment.end %>
+</p>
+
+<p>
+  <b>Audio:</b>
+  <%=h @audio.filename %>
+</p>
+
+
+<%= link_to 'Edit', edit_audio_fragment_path(@audio,@fragment) %> |
+<%= link_to 'Back', audio_fragments_path(@audio) %>

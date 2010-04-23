@@ -1,0 +1,21 @@
+<% title h(@adjective.content)  %>
+
+<p>
+<% if @adjective.itype %>
+  <strong>-i adj.</strong>
+<% else %>
+  <strong>-na adj.</strong>
+<% end %>
+</p>
+<p>Translations:
+<ul>
+<% for translation in @adjective.translations %>
+  <%= "<li>[#{translation.lang}] #{translation.content}</li>" %>
+<% end %>
+</ul>
+</p>
+<p>
+  <%= link_to "Edit", edit_adjective_path(@adjective) %> |
+  <%= link_to "Destroy", @adjective, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", adjectives_path %>
+</p>

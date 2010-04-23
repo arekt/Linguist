@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <th>Content</th>
+    <th>Unit</th>
+    <th>Section</th>
+  </tr>
+  <% for sentence in sentences %>
+    <tr>
+      <td><%= link_to h(sentence.content), sentence %></td>
+      <td><%=h sentence.source.unit %></td>
+      <td><%=h sentence.source.section %></td>
+    </tr>
+  <% end %>
+</table>
+

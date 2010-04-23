@@ -1,0 +1,14 @@
+<% title "Dialogs" %>
+
+<table>
+  <tr>
+    <th>Title</th>
+  </tr>
+  <% for dialog in @dialogs %>
+    <tr>
+      <td><%=link_to h(dialog.title), dialog %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Dialog", new_dialog_path %></p>

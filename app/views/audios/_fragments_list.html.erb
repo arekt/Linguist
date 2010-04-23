@@ -1,0 +1,7 @@
+<table>
+<% @fragments.each do |fragment| %>
+  <tr>
+    <td><%= fragment.sentence.content||fragment.word.content %></td><td><%= button_to_function "edit", "display_fragment_form('#{escape_javascript edit_audio_fragment_path(@audio,fragment)}');return false;" %></td><td><%= button_to_function "play", "play(#{fragment.start},#{fragment.end});" %></td>
+  </tr> 
+<% end %>
+</table>

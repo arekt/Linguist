@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= h(yield(:title) || "Untitled") %></title>
+    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag 'fancybox/jquery.fancybox-1.3.0.css' %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+   <div id="container">
+    <div id="user_nav">  
+     <% if current_user %>  
+       <%= link_to "Edit profile", edit_user_path(:current) %>  
+       <%= link_to "Logout", logout_path %>  
+     <% else %>  
+       <%= link_to "Register", new_user_path %>  
+       <%= link_to "Log in", login_path %>  
+     <% end %> 
+    </div>
+      <%= link_to "sentences", sentences_path %>|
+      <%= link_to "adjectives", adjectives_path %>|
+      <%= link_to "sources", sources_path %>|
+      <%= link_to "dialogs", dialogs_path %>|
+      <%= link_to "exercises", exercises_path %>|
+      <%= link_to "audio files", audios_path %>
+      
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_{name}" %>
+      <%- end -%>
+      
+      <%- if show_title? -%>
+        <center><h1><%=h yield(:title) %></h1></center>
+      <%- end -%>
+      
+      <%= yield %>
+    </div>
+  </body>
+</html>

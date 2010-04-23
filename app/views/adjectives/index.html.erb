@@ -1,0 +1,16 @@
+<% title "Adjectives" %>
+
+<table>
+  <tr>
+    <th>Content</th>
+    <th>type</th>
+  </tr>
+  <% for adjective in @adjectives %>
+    <tr>
+      <td><%= link_to h(adjective.content), adjective %></td>
+      <td><%= (adjective.itype)?'-i adj.':'-na adj.' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Adjective", new_adjective_path %></p>

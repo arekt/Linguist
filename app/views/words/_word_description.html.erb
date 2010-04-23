@@ -1,0 +1,31 @@
+<p>
+  <%=h @word.source.display_name %>
+</p>
+<center>
+<% if @fragment %>
+  <h1>
+    <%= link_to_function h(@word.content), "play(\'#{@audio.filename}\',#{@fragment.start},#{@fragment.end});" %>
+  </h1>
+<% else %>
+  <h1><%= h(@word.content) %></h1>
+<% end %>
+<div id='navigation'>
+  <%= button_to_function('previous', "show(\'#{word_path(@previous)}\');") if @previous %>
+  <%= button_to_function('previous', "alert('This is first word')") unless @previous %>
+  <%= button_to_function('next', "show(\'#{word_path(@next)}\');") if @next %>
+  <%= button_to_function('next', "alert('This is already last word');") unless @next %>
+</div>
+</center>
+
+<% for translation in @word.translations -%>
+  <p>
+  <%= "[#{translation['lang']}]" %>
+  <%= translation['content'] %>
+  </p>
+<% end -%> 
+
+<p>
+  <%= link_to "Edit", edit_word_path(@word) %> |
+  <%= link_to "Destroy", @word, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", words_path %> |
+</p>

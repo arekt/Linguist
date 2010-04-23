@@ -1,0 +1,16 @@
+<% title "Translation" %>
+
+<p>
+  <strong>Lang:</strong>
+  <%=h @translation.lang %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%=h @translation.content %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_translation_path(@translation) %> |
+  <%= link_to "Destroy", @translation, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", translations_path %>
+</p>

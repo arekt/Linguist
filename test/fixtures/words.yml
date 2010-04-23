@@ -1,0 +1,9 @@
+one:
+  content: MyString
+  lang: MyString
+  category: MyString
+
+two:
+  content: MyString
+  lang: MyString
+  category: MyString

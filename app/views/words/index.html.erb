@@ -1,0 +1,12 @@
+<% title "Words" %>
+
+<div id='search' style='float:right;'>
+<% form_tag(words_path, :method => 'GET') do %>
+<%= text_field_tag :search %>
+<%= submit_tag('Search') %>
+<% end %>
+</div>
+
+<%= render :partial => 'words' %>
+
+<p><%= link_to "New Word", new_word_path %></p>

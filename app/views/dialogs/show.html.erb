@@ -1,0 +1,15 @@
+<% title h @dialog.title %>
+<table>
+<% for sentence in @dialog.dsentences -%>
+  <tr class='dialog'>
+  <td class='person'><%=h sentence.person %></td><td class='separator'>:</td>
+  <td><%=h(sentence.content).gsub("\n",'<br>') %><td>
+  </tr>
+<% end %>
+</table>
+<p>
+  <%= link_to "Edit", edit_dialog_path(@dialog) %> |
+  <%= link_to "Destroy", @dialog, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", dialogs_path %>
+</p>
+

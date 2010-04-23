@@ -1,0 +1,13 @@
+<% fields_for 'exercise[questions][]', question_form, :index => '' do |f| %>
+<div class='single_question'>
+
+  <p>
+    <%= f.label :content, 'Question' %><br>
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.label :correct_answer, 'Answer' %><br>
+    <%= f.text_area :correct_answer %><%= button_to_function "Remove question","remove_question(this)" %>
+  </p>
+</div>
+<% end %>

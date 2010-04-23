@@ -1,0 +1,6 @@
+$("#active_fragment").html("<%= escape_javascript(render("form")) %>");
+$("#active_fragment form").submit(function () {
+        //alert('Submit');
+        $.post($(this).attr('action'), $(this).serialize(), null, "script");
+        return false;
+});

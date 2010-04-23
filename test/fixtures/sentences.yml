@@ -1,0 +1,9 @@
+one:
+  content: MyString
+  source_id: 1
+  dialog_id: 1
+
+two:
+  content: MyString
+  source_id: 1
+  dialog_id: 1

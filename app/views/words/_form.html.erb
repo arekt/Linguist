@@ -1,0 +1,30 @@
+<%= javascript_include_tag ['jquery-1.3.2','application'] %>
+<%= javascript_tag "var translation_html=\'#{escape_javascript render :partial => 'translation', :collection => [Translation.new] }\';" %>
+
+<% form_for @word do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :source %><br />
+    <%= f.collection_select :source_id, Source.all, :id, :display_name %> <%= link_to "New source", new_source_path %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </p>
+  <p>
+    <%= f.label :lang %><br />
+    <%= f.select :lang, ['japanese','english','polish'] %>
+  </p>
+  <p>
+    <%= f.label :category %><br />
+    <%= f.select :category, ['verb','noun','adjective'] %>
+  </p>
+  <p>
+  <div class='translations'>
+    Translations:<br>
+    <%= button_to_function "New translation","insert_translation(translation_html)" %>
+    <%= render :partial => 'translation', :collection => @word.translations %>
+  </div>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

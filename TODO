@@ -1,0 +1,5 @@
+TODO
+====
+- Code is total mess. Refactoring is needed.
+- Remove authentication ( will be done with devise in the future )
+- write tests

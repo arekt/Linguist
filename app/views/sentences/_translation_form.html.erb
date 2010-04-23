@@ -1,0 +1,8 @@
+<% fields_for 'sentence[translation_attributes][]', translation_form, :index => '' do |tf| %>
+  <p>    
+ <%= tf.label :content %> <br>
+ <%= tf.text_area :content %><br>
+ <%= tf.label :lang %>
+ <%= tf.select :lang, ['pl','jp_kana','en'] %>
+  </p>
+<% end %>

@@ -10,10 +10,8 @@
   <h1><%= h(@word.content) %></h1>
 <% end %>
 <div id='navigation'>
-  <%= button_to_function('previous', "show(\'#{word_path(@previous)}\');") if @previous %>
-  <%= button_to_function('previous', "alert('This is first word')") unless @previous %>
-  <%= button_to_function('next', "show(\'#{word_path(@next)}\');") if @next %>
-  <%= button_to_function('next', "alert('This is already last word');") unless @next %>
+  <%= button_to_function('previous', "show_previous();") %>
+  <%= button_to_function('next', "show_next();") %>
 </div>
 </center>
 

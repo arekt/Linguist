@@ -37,10 +37,35 @@ function show(url){
         // this is quite fun:
         // extract function connected to link and run this function 
         // this is the same as you click the link
-        var play_function = $('h1 a').attr("onclick");
+        // so we automaticly play the audio after loading new word
+        var play_function = $('h1 a').attr("onclick"); 
         play_function();
       }
   };
  $.get(url,null,extract_and_run,"script");
  return false;
 }
+
+function show_next(){
+  for (var i=1 in WORDS){
+    if (WORDS[i-1] == CURRENT_WORD) 
+      {
+        CURRENT_WORD = WORDS[i];
+        show('/words/'+CURRENT_WORD);
+        return false;
+      }
+  }
+}
+
+function show_previous(){
+  for (var i=1 in WORDS){
+    if (WORDS[i] == CURRENT_WORD) 
+      {
+        CURRENT_WORD = WORDS[i-1];
+        show('/words/'+CURRENT_WORD);
+        return false;
+      }
+  }
+}
+
+

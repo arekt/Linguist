@@ -1,30 +1,13 @@
 class WordsController < ApplicationController
 
   def index
-    if params[:search]
-      re_unit = /\s*unit:(\d+)\s*/
-      word_conditions = params[:search].gsub(re_unit,'')
-      session[:source_conditions] = $1?{:unit => $1 }:{}
-      if word_conditions.empty?
-        session[:word_conditions] = {}
-      else
-        session[:word_conditions] = { :content => Regexp.new(word_conditions) }
-      end
-    end
-    logger.debug "session data: #{session.inspect}"
-      
-    @words = Source.all(:conditions => session[:source_conditions],:limit=>100).map {|s| s.words.all(:conditions => session[:word_conditions])}.flatten
-    @search = SearchResult.first(:user_id => current_user().id, :search_type => :words) || SearchResult.new(:user_id => current_user().id)
-    @search.result = @words.map(&:id)
-    @search.search_type = :words
-    @search.save
+    @words = Source.first(:section => 'Kotoba').words.all
   end
   
   def show
-    #@words = SearchResult.first(:user_id => current_user().id).result
+    @words_ids_json = Source.first(:section => 'Kotoba').words.all.map(&:id).map(&:to_s).to_json
+    
     @word = Word.find(params[:id])
-    @next = @word.next(current_user)
-    @previous = @word.previous(current_user)
     @fragment, @audio = @word.fragment_audio
   
     respond_to do |format|

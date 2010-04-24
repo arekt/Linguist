@@ -1,4 +1,6 @@
 <%= javascript_include_tag "jquery-1.4.1.min","jquery.swfobject.1-0-8","FABridge", "application_word" %>
+<%= javascript_tag "var WORDS = #{@words_ids_json}; var CURRENT_WORD = #{@word.id.to_json}" %>
+
 <div id='mp3_player'>
 </div>
 

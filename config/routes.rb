@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :units
+
   map.resources :words
 
   map.resources :audios, :has_many => [ :fragments ]

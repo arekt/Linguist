@@ -1,0 +1,14 @@
+<% form_for @unit, :html => {:multipart => true} do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <% fields_for :asset do |af| %>
+  <p>
+    <%= af.label :file %><br />
+    <%= af.file_field :file %>
+  </p>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

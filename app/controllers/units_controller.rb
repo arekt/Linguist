@@ -44,4 +44,10 @@ class UnitsController < ApplicationController
     flash[:notice] = "Successfully destroyed unit."
     redirect_to units_url
   end
+
+  def current
+   session[:unit_id] = params[:unit][:id]
+   @unit = Unit.find(params[:unit][:id])
+  end
+
 end

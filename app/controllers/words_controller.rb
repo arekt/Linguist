@@ -1,14 +1,17 @@
 class WordsController < ApplicationController
 
   def index
-    @words = Source.first(:section => 'Kotoba').words.all
+    @unit = Unit.find(session[:unit_id]) || Unit.first
+    @words = @unit.words.all
+    
   end
   
   def show
-    @words_ids_json = Source.first(:section => 'Kotoba').words.all.map(&:id).map(&:to_s).to_json
+    @unit = Unit.find(session[:unit_id]) || Unit.first
+    @words_ids_json = @unit.words.all.map(&:id).map(&:to_s).to_json
     
     @word = Word.find(params[:id])
-    @fragment, @audio = @word.fragment_audio
+    #@fragment, @audio = @word.fragment_audio
   
     respond_to do |format|
       format.html # index.html.erb

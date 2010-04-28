@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/bin/rascut --fcsh-cmd="/opt/flex/bin/fcsh" --compile-config "-default-size 1024 50" $*
+/usr/bin/rascut --fcsh-cmd="/opt/flex/flex3.5/bin/fcsh" --compile-config "-default-size 1024 50" $*

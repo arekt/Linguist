@@ -5,4 +5,5 @@ config/database.yml
 db/*.sqlite3
 public/waveform/*
 public/uploads/*
+actionscript/*.swf
 *.swp

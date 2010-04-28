@@ -4,8 +4,8 @@
 <% form_for @word do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :source %><br />
-    <%= f.collection_select :source_id, Source.all, :id, :display_name %> <%= link_to "New source", new_source_path %>
+    <%= f.label :unit %><br />
+    <%= f.collection_select :unit_id, Unit.all, :id, :name %> <%= link_to "New unit", new_unit_path %>
   </p>
   <p>
     <%= f.label :content %><br />

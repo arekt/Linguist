@@ -2,7 +2,8 @@ class AudiosController < ApplicationController
   # GET /audios
   # GET /audios.xml
   def index
-    @audios = Audio.all
+    @unit = Unit.find(session[:unit_id]) || Unit.first
+    @audios = @unit.assets(:file_type => "audio/mpeg")
 
     respond_to do |format|
       format.html # index.html.erb

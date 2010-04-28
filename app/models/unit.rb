@@ -3,4 +3,5 @@ class Unit
   key :name, String
 
   many :assets 
+  many :words
 end

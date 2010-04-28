@@ -16,7 +16,12 @@
      <% else %>  
        <%= link_to "Register", new_user_path %>  
        <%= link_to "Log in", login_path %>  
-     <% end %> 
+     <% end %>
+     <% form_tag(current_unit_path, :method => "get") do %>  
+        <%= label_tag(:id, "Unit") %>  
+        <%= collection_select :unit, :id, Unit.all, :id, :name %>  
+        <%= submit_tag("Set") %> 
+     <% end %>  
     </div>
       <%= link_to "words", words_path %>|
       <%= link_to "sentences", sentences_path %>|

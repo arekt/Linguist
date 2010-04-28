@@ -1,8 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :units
+  map.resources :assets
 
+  map.resources :units, :member => { :current => :get }
+  map.current_unit 'current_unit', :controller => 'units', :action => 'current'
   map.resources :words
-
   map.resources :audios, :has_many => [ :fragments ]
   map.resources :exercises
   map.resources :adjectives
@@ -15,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'  
   map.resources :user_sessions  
   map.play 'play/:id', :controller => 'sentences', :action => 'play'
-  map.root :controller => "sentences"
+  map.root :controller => "units"
 
   # The priority is based upon order of creation: first created -> highest priority.
 

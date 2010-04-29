@@ -40,8 +40,9 @@ import flash.utils.setTimeout;
 import flash.utils.ByteArray;
 //import mx.core.UIComponent;
 
-
 public class FragmentPlayer extends Sprite {
+        private var graphWidth=1024;
+        private var graphHeight=100;
         private var externalBridge:FABridge;
         private var background_alpha:Number=1;
         private var sampleData:ByteArray;
@@ -136,9 +137,9 @@ public class FragmentPlayer extends Sprite {
             var g:Graphics = background.graphics;
             g.clear();
             g.beginFill(0xa0a0ff);//,background_alpha);
-            g.drawRect(0,0,800,200);
+            g.drawRect(0,0,graphWidth,graphHeight);
             g.endFill();
-            drawGraph(800,200);
+            drawGraph(graphWidth,graphHeight);
         }
         // this is just to make things easier for javascript
         public function load(url:String):void {
@@ -158,7 +159,7 @@ public class FragmentPlayer extends Sprite {
 
         private function startSelection(event:MouseEvent):void {
             sStart = mouseX; //times[int(mouseX/sampleWidth)];
-            drawGraph(800,200);
+            drawGraph(graphWidth,graphHeight);
         }
         private function endSelection(event:MouseEvent):void {
             sEnd = mouseX; //times[int(mouseX/sampleWidth)];
@@ -166,21 +167,22 @@ public class FragmentPlayer extends Sprite {
             channel = snd.play(times[int(sStart/sampleWidth)+sampleShift]);
             var timeout:int = times[int(sEnd/sampleWidth)] - times[int(sStart/sampleWidth)]; //ms
             setTimeout(channel.stop, timeout);
-            drawGraph(800,200,sStart,sEnd,0xffff00);
+            drawGraph(graphWidth,graphHeight,sStart,sEnd,0xffff00);
+            dispatchEvent(new Event("SELECTION_CHANGED"));
         }
        
         private function shiftLeft(event:MouseEvent):void {
            if (sampleShift >=100) {
                 sampleShift = sampleShift - 100;
-                 clearGraph(800,200);
-                 drawGraph(800,200);
+                 clearGraph(graphWidth,graphHeight);
+                 drawGraph(graphWidth,graphHeight);
            }  
         }
         private function shiftRight(event:MouseEvent):void {
            if (sampleShift <(data.length-100)) {
                 sampleShift = sampleShift + 100;
-                clearGraph(800,200)
-                drawGraph(800,200);
+                clearGraph(graphWidth,graphHeight)
+                drawGraph(graphWidth,graphHeight);
            } 
         }
 
@@ -188,7 +190,7 @@ public class FragmentPlayer extends Sprite {
             var g:Graphics = background.graphics;
                  g.clear();
                  g.beginFill(0xa0a0ff);//,background_alpha);
-                    g.drawRect(0,0,width,height);
+                 g.drawRect(0,0,width,height);
                  g.endFill();
 
         }
@@ -235,10 +237,10 @@ public class FragmentPlayer extends Sprite {
             for (var i:int=start;i<end;i++){
                     g.lineStyle(1, 0x000000);
                     g.beginFill(color,1);  // params color, alpha
-                    g.drawRect(i*sampleWidth,height,sampleWidth,-(data[i+sampleShift]-minPeak)*(height/rangePeak));
+                    g.drawRect(i*sampleWidth,height,sampleWidth,int(-(data[i+sampleShift]-minPeak)*Number(height/rangePeak)));
                     g.endFill();
             }
-            if (start == 0) { // it's mean this is not selection draw
+            if (start == 0) { // when start is != 0 it's mean we draw yellow selection, so don't redraw position bar then.
                 drawPositionBar(width,height,end-start);
             }
         }

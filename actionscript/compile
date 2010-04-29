@@ -1,2 +1,5 @@
 #!/bin/bash
-/usr/bin/rascut --fcsh-cmd="/opt/flex/flex3.5/bin/fcsh" --compile-config "-default-size 1024 50" $*
+# read about options
+# /opt/flex/flex3.5/bin/mxmlc -help list advanced
+# -target-player <version>
+/usr/bin/rascut --fcsh-cmd="/opt/flex/flex3.5/bin/fcsh" --compile-config "-default-size 1024 110" $*

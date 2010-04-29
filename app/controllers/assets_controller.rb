@@ -15,10 +15,12 @@ class AssetsController < ApplicationController
   
   def new
     @asset = Asset.new
+    @asset.unit = Unit.find(session[:unit_id]) || Unit.first     
   end
   
   def create
     @asset = Asset.new(params[:asset])
+    
     if @asset.save
       flash[:notice] = "Successfully created asset."
       redirect_to @asset
@@ -29,6 +31,7 @@ class AssetsController < ApplicationController
   
   def edit
     @asset = Asset.find(params[:id])
+     
   end
   
   def update

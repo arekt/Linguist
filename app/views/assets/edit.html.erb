@@ -1,6 +1,18 @@
-<% title "Edit Asset" %>
+<%= javascript_include_tag "jquery-1.4.1.min","jquery.swfobject.1-0-8", "FABridge", "application_assets" %>
 
-<%= render :partial => 'form' %>
+<% title "Edit Asset" %>
+<p>
+  <%= @asset.file_name %> 
+  <%= link_to_function "change", "$('#asset_form').show()" %>
+<p>
+<div id="asset_form" style='display:none;'>
+  <%= render :partial => 'form' %>
+</div>
+
+<div id="fragment_player"></div>
+
+
+
 
 <p>
   <%= link_to "Show", @asset %> |

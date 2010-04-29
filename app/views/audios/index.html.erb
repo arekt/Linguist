@@ -6,7 +6,7 @@
 
 <% @audios.each do |audio| %>
   <tr>
-    <td id='audio' ><%= link_to h(audio.file_name), '' %></td>
+    <td id='audio' ><%= link_to h(audio.file_name), audio %></td>
   </tr>
 <% end %>
 </table>

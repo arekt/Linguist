@@ -24,6 +24,8 @@
 // if we add sampleShift variable, we could rewind, and go forward through all mp3 if it's longer then 8s
 
 package {
+
+import bridge.FABridge;
 import flash.display.Graphics;
 import flash.display.Sprite;
 import flash.events.Event;
@@ -40,6 +42,7 @@ import flash.utils.ByteArray;
 
 
 public class FragmentPlayer extends Sprite {
+        private var externalBridge:FABridge;
         private var background_alpha:Number=1;
         private var sampleData:ByteArray;
         private var data:Array;
@@ -67,6 +70,8 @@ public class FragmentPlayer extends Sprite {
         private var samplesToRead:Number;
 
         public function FragmentPlayer():void {
+            externalBridge = new FABridge();
+            externalBridge.rootObject = this;
             background = new Sprite();
             addChild(background);
             background.addEventListener(MouseEvent.MOUSE_DOWN, startSelection);
@@ -80,7 +85,7 @@ public class FragmentPlayer extends Sprite {
             positionBar.addChild(afterBar);   
             beforeBar.addEventListener(MouseEvent.MOUSE_DOWN, shiftLeft);
             afterBar.addEventListener(MouseEvent.MOUSE_DOWN, shiftRight);
-            audio = "Kamisama_page1.mp3";
+            //audio = "assets/4bd5801037a31c7619000007.mp3";
         }
 
         public function set backgroundAlpha(value:String):void {
@@ -135,7 +140,13 @@ public class FragmentPlayer extends Sprite {
             g.endFill();
             drawGraph(800,200);
         }
-
+        // this is just to make things easier for javascript
+        public function load(url:String):void {
+            trace('loading new file');
+            audio = url;
+        }
+        
+ 
         private function progressHandler(event:ProgressEvent):void {
             var loadTime:Number = event.bytesLoaded / event.bytesTotal;
             var LoadPercent:uint = Math.round(100 * loadTime);

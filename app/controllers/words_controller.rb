@@ -3,7 +3,6 @@ class WordsController < ApplicationController
   def index
     @unit = Unit.find(session[:unit_id]) || Unit.first
     @words = @unit.words.all
-    
   end
   
   def show
@@ -53,17 +52,6 @@ class WordsController < ApplicationController
     flash[:notice] = "Successfully destroyed word."
     redirect_to words_url
   end
-
-before_filter :check_for_session_data
-
-protected
-
-  def check_for_session_data
-    return if session[:source_conditions] && session[:word_conditions]
-    session[:word_conditions] = {}
-    session[:source_conditions] = {}
-  end
-
 end
 
 

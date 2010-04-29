@@ -1,8 +1,12 @@
-<% form_for @asset do |f| %>
+<% form_for @asset, :html => {:multipart => true} do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :file_name %><br />
-    <%= f.text_field :file_name %>
+    <%= f.label :unit %><br />
+    <%= f.collection_select :unit_id, Unit.all, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :file %><br />
+    <%= f.file_field :file %>
   </p>
   <p><%= f.submit "Submit" %></p>
 <% end %>

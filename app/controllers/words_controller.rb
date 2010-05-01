@@ -34,7 +34,18 @@ class WordsController < ApplicationController
   
   def edit
     @word = Word.find(params[:id])
-  end
+    case params[:asset_id] 
+      when "remove"
+        @word.fragment.asset = nil
+      else
+        @asset = Asset.find(params[:asset_id])
+        @word.fragment.asset = @asset
+    end
+     respond_to do |format|
+      format.html
+      format.js
+     end
+end
   
   def update
     @word = Word.find(params[:id])

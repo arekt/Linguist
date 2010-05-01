@@ -1,13 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  sentence_id: MyString
-  start: 1
-  end: 1
-  audio_id: MyString
-
-two:
-  sentence_id: MyString
-  start: 1
-  end: 1
-  audio_id: MyString
+# one:
+#   column: value
+#
+# two:
+#   column: value

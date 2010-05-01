@@ -5,8 +5,8 @@
 <% form_for @exercise do |f| %>
   <%= f.error_messages %>
   <p>  
-    <%= f.label :source_id %><br />
-    <%= f.collection_select :source_id, Source.all, :id, :display_name %> <%= link_to "New source", new_source_path %>
+    <%= f.label :unit_id %><br />
+    <%= f.text_field :unit_id, current_unit %> 
   </p>
 
   <p>

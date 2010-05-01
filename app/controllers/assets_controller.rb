@@ -15,7 +15,7 @@ class AssetsController < ApplicationController
   
   def new
     @asset = Asset.new
-    @asset.unit = Unit.find(session[:unit_id]) || Unit.first     
+    @asset.unit = Unit.find(session[:unit_id]) || Unit.first
   end
   
   def create
@@ -31,7 +31,7 @@ class AssetsController < ApplicationController
   
   def edit
     @asset = Asset.find(params[:id])
-     
+    @words = @asset.unit.words.all('fragment.asset_id' => @asset.id)
   end
   
   def update

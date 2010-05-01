@@ -1,18 +1,19 @@
-div#fragment_player {
-  
+input#word_fragment_start, input#word_fragment_stop {
+width: 50px;
 }
-
+div#unit_selector {
+  float: right;
+}
+div#fragment_player {
+}
 td#audio {
   width: 80%
 }
-
-
 div#user_nav { float: right; font-size: 0.9em; }
 ol.formList
 {
 list-style-type:none;
 }
-
 
 h2 {
   text-align: center;

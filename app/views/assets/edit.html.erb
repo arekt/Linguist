@@ -2,6 +2,7 @@
 
 <%= javascript_tag "
   var audio_url =\'#{asset_url(@asset)}.mp3\'
+  var asset_id =\'#{@asset.id.to_s}\'
 " %>
 
 <% title "Edit Asset" %>
@@ -14,6 +15,14 @@
 </div>
 
 <div id="fragment_player"></div>
+
+<%= render :partial => 'word', :collection => @words, :locals => { :asset_id => @asset.id.to_s } %>
+
+<%= collection_select :word, :id, @asset.unit.words.without_asset, :id, :content %>
+<%= button_to_function "Add word", "addWord($('select#word_id').val())" %>
+
+<div id="word_form">
+</div>
 
 <p>
   <%= link_to "Show", @asset %> |

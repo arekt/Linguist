@@ -1,0 +1,2 @@
+alert('inside js controller');
+$('#word_form').html("<%= escape_javascript(render 'assets/word', :locals => { :word => @word }) %>")

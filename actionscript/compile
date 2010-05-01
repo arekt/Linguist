@@ -2,4 +2,4 @@
 # read about options
 # /opt/flex/flex3.5/bin/mxmlc -help list advanced
 # -target-player <version>
-/usr/bin/rascut --fcsh-cmd="/opt/flex/flex3.5/bin/fcsh" --compile-config "-default-size 1024 110" $*
+/usr/bin/rascut --fcsh-cmd="/opt/flex/flex3.5/bin/fcsh" --compile-config "-default-size 1024 115" $*

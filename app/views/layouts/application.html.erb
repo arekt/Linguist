@@ -9,27 +9,19 @@
   </head>
   <body>
    <div id="container">
-    <div id="user_nav">  
-     <% if current_user %>  
-       <%= link_to "Edit profile", edit_user_path(:current) %>  
-       <%= link_to "Logout", logout_path %>  
-     <% else %>  
-       <%= link_to "Register", new_user_path %>  
-       <%= link_to "Log in", login_path %>  
-     <% end %>
+    <div id='unit_selector'>
      <% form_tag(current_unit_path, :method => "get") do %>  
         <%= label_tag(:id, "Unit") %>  
         <%= collection_select :unit, :id, Unit.all, :id, :name %>  
         <%= submit_tag("Set") %> 
      <% end %>  
     </div>
+      <%= link_to "units", units_path %>|
       <%= link_to "words", words_path %>|
       <%= link_to "sentences", sentences_path %>|
-      <%= link_to "adjectives", adjectives_path %>|
-      <%= link_to "sources", sources_path %>|
       <%= link_to "dialogs", dialogs_path %>|
       <%= link_to "exercises", exercises_path %>|
-      <%= link_to "audio files", audios_path %>
+      <%= link_to "assets", assets_path %>
       
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_{name}" %>

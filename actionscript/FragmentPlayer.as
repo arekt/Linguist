@@ -71,6 +71,7 @@ public class FragmentPlayer extends Sprite {
         private var samplesToRead:Number;
 
         public function FragmentPlayer():void {
+            super();
             externalBridge = new FABridge();
             externalBridge.rootObject = this;
             background = new Sprite();
@@ -132,6 +133,7 @@ public class FragmentPlayer extends Sprite {
             // snd.extract(sampleData,samplesToRead); // ignore remaining part for now, I guess we could leave without less then 0.1s sound
             rangePeak = maxPeak - minPeak; 
             trace("You could draw graph here")
+            trace("Stage size:"+stage.width+"x"+stage.height);
             channel = snd.play();
             channel.stop();
             var g:Graphics = background.graphics;
@@ -140,6 +142,8 @@ public class FragmentPlayer extends Sprite {
             g.drawRect(0,0,graphWidth,graphHeight);
             g.endFill();
             drawGraph(graphWidth,graphHeight);
+            trace("Graph ready");
+            trace("Stage size:"+stage.width+"x"+stage.height);
         }
         // this is just to make things easier for javascript
         public function load(url:String):void {
@@ -207,19 +211,19 @@ public class FragmentPlayer extends Sprite {
             //total
             g.clear()
             g.beginFill(0x006666,1);
-            g.drawRect(0,0,width,10);
+            g.drawRect(0,0,width,15);
             g.endFill();
             //before
             g = beforeBar.graphics;
             g.clear();
             g.beginFill(0x000000,1);
-            g.drawRect(0,0,int(sampleShift*sampleWidth),10);
+            g.drawRect(0,0,int(sampleShift*sampleWidth),15);
             g.endFill();
             //after
             g = afterBar.graphics;
             g.clear();
             g.beginFill(0x000000,1);
-            g.drawRect(int((sampleShift+sampleLength)*sampleWidth),0,width-int((sampleShift+sampleLength)*sampleWidth),10);
+            g.drawRect(int((sampleShift+sampleLength)*sampleWidth),0,width-int((sampleShift+sampleLength)*sampleWidth),15);
             g.endFill();
         
         }

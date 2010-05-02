@@ -4,8 +4,7 @@ class Asset
   plugin Joint
   attachment :file
 
-  #key :word_ids, Array
   key :unit_id, ObjectId, :index => true, :required => true
+  many :words, :foreign_key => 'fragment.asset_id'
   belongs_to :unit
-  #many :words
 end

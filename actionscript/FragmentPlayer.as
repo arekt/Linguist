@@ -58,8 +58,8 @@ public class FragmentPlayer extends Sprite {
         private var sampleWidth:Number = 4; // how big will be 100ms fragment on the screen (px)
         private var sampleShift:int = 100; // this is index for data and times table that we add all the time
         private var totalLength:Number; // lenght of sound in pixels
-        private var sStart:int = 0;
-        private var sEnd:int = 0;
+        public var sStart:int = 0;
+        public var sEnd:int = 0;
 
         private var snd:Sound;
         private var req:URLRequest;

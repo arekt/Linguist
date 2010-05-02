@@ -49,11 +49,18 @@ end
   
   def update
     @word = Word.find(params[:id])
-    if @word.update_attributes(params[:word])
-      flash[:notice] = "Successfully updated word."
-      redirect_to @word
-    else
-      render :action => 'edit'
+    @asset = Asset.find(params[:asset_id])
+    @asset_words = @asset.unit.words.all('fragment.asset_id' => @asset.id)
+    logger.debug "*** @asset => #{@asset.inspect}"
+    logger.debug "*** @asset_words => #{@asset_words.inspect}"
+    respond_to do |format|
+        if @word.update_attributes(params[:word])
+          flash[:notice] = "Successfully updated word."
+          format.html{redirect_to @word}
+          format.js
+        else
+          format.html{render :action => 'edit'}
+        end
     end
   end
   

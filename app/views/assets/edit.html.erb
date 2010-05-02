@@ -15,8 +15,9 @@
 </div>
 
 <div id="fragment_player"></div>
-
-<%= render :partial => 'word', :collection => @words, :locals => { :asset_id => @asset.id.to_s } %>
+<div id="asset_words">
+  <%= render :partial => 'asset_word', :collection => @asset_words %>
+</div>
 
 <%= collection_select :word, :id, @asset.unit.words.without_asset, :id, :content %>
 <%= button_to_function "Add word", "addWord($('select#word_id').val())" %>

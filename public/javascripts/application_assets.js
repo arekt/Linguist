@@ -30,7 +30,9 @@ var initWaveform = function() {
     };
 
 var callback = function(event) {
-  //alert('something was changed');
+  //alert(waveformApp.get("sStart")+":"+waveformApp.get("sEnd"));
+  $("form input#word_fragment_start").val(waveformApp.get("sStart"));
+  $("form input#word_fragment_stop").val(waveformApp.get("sEnd"));
 }
 
 var addWord = function(word_id) {

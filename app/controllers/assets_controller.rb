@@ -31,7 +31,7 @@ class AssetsController < ApplicationController
   
   def edit
     @asset = Asset.find(params[:id])
-    @words = @asset.unit.words.all('fragment.asset_id' => @asset.id)
+    @asset_words = @asset.unit.words.all('fragment.asset_id' => @asset.id)
   end
   
   def update

@@ -10,5 +10,13 @@ class Unit
       self.select do |w| w.fragment == nil || w.fragment.asset_id == nil end
     end
   end
+  many :sentences do
+    def without_asset
+      #if fragment don't exist
+      #or fragment.asset_id is nil
+      self.select do |s| s.fragment == nil || s.fragment.asset_id == nil end
+    end
+  end
+
 
 end

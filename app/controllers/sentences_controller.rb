@@ -1,51 +1,28 @@
 class SentencesController < ApplicationController
   
   def index
-   if params[:search]
-      re_unit = /\s*unit:(\d+)\s*/
-      re_section = /\s*section:(\w+)\s*/
-      source_unit = re_unit.match(params[:search])
-      source_section = re_section.match(params[:search])
-      session[:source_conditions]={}
-      session[:source_conditions][:unit] = source_unit[1] if source_unit
-      session[:source_conditions][:section] = source_section[1] if source_section
-      sentence_conditions = params[:search].gsub(re_unit,'').gsub(re_section,'')
-   end
-   logger.debug "*** conditions : #{sentence_conditions.inspect}"
-   if sentence_conditions 
-     session[:sentence_conditions] = { :content => Regexp.new(sentence_conditions) }
-   else
-     session[:sentence_conditions]={}
-   end
-    
-    logger.debug "session data: #{session.inspect}"
-      
-    @sentences = Source.all(:conditions => session[:source_conditions]).map do |s| 
-      s.sentences.all(:conditions => session[:sentence_conditions])
-    end.flatten
-    @search = SearchResult.first(:user_id => current_user().id, :search_type => :sentences) || SearchResult.new(:user_id => current_user().id)
-    @search.result = @sentences.map(&:id)
-    @search.search_type = :sentences
-    @search.save
+      @unit = Unit.find(session[:unit_id]) || Unit.first
+      @sentences = @unit.sentences.all
+
   end
   
   def show
+    @unit = Unit.find(session[:unit_id]) || Unit.first
+    @sentences_ids_json = @unit.sentences.all.map(&:id).map(&:to_s).to_json
     @sentence = Sentence.find(params[:id])
-    @next = @sentence.next(current_user)
-    @previous = @sentence.previous(current_user)
-    @fragment, @audio = @sentence.fragment_audio
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js  
+    end
   end
   
   def new
-    @sentence = Sentence.new
-    @sentence.source_id = session['default_source'] if session['default_source'] 
-    @translations=@sentence.translations
-    @translations << Translation.new
+    @sentence = Sentence.new  
   end
   
   def create
     @sentence = Sentence.new(params[:sentence])
-    session['default_source'] = params[:sentence][:source_id] if params[:sentence][:source_id]
     if @sentence.save
       flash[:notice] = "Successfully created sentence."
       redirect_to @sentence
@@ -55,19 +32,33 @@ class SentencesController < ApplicationController
   end
   
   def edit
-    @sentence = Sentence.find(params[:id])
-    @translations = @sentence.translations 
-    @translations << Translation.new
-    logger.debug "*** translations : #{@translations}"
+      @sentence = Sentence.find(params[:id])
+    case params[:asset_id] 
+      when "remove"
+        @sentence.fragment.asset = nil
+      else
+        @asset = Asset.find(params[:asset_id])
+        @sentence.fragment.asset = @asset
+    end
+     respond_to do |format|
+      format.html
+      format.js
+     end
   end
   
   def update
     @sentence = Sentence.find(params[:id])
-    if @sentence.update_attributes(params[:sentence])
-      flash[:notice] = "Successfully updated sentence."
-      redirect_to @sentence
-    else
-      render :action => 'edit'
+    @asset = Asset.find(params[:asset_id])
+    @asset_sentences = @asset.unit.sentences.all('fragment.asset_id' => @asset.id)
+
+    respond_to do |format|
+        if @sentence.update_attributes(params[:sentence])
+          flash[:notice] = "Successfully updated sentence."
+          format.html{redirect_to @sentence}
+          format.js
+        else
+          format.html{render :action => 'edit'}
+        end
     end
   end
   

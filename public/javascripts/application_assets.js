@@ -35,6 +35,9 @@ var callback = function(event) {
   stop = waveformApp.getSelectionTimes()[1];
   $("form input#word_fragment_start").val(start);
   $("form input#word_fragment_stop").val(stop);
+  $("form input#sentence_fragment_start").val(start);
+  $("form input#sentence_fragment_stop").val(stop);
+
 }
 
 var addWord = function(word_id) {
@@ -44,6 +47,16 @@ var addWord = function(word_id) {
 
 var removeWord = function(word_id) {
   $.get("/assets/remove/words/"+word_id+"/edit", null, null, "script");
+  return false;
+}
+
+var addSentence = function(sentence_id) {
+  $.get("/assets/"+asset_id+"/sentences/"+sentence_id+"/edit", null, null, "script");
+  return false;
+}
+
+var removeSentence = function(sentence_id) {
+  $.get("/assets/remove/sentences/"+sentence_id+"/edit", null, null, "script");
   return false;
 }
 

@@ -1,5 +1,6 @@
 TODO
 ====
-- Code is total mess. Refactoring is needed.
-- Remove authentication ( will be done with devise in the future )
+- Write sentence MVC similar to word
+- Display progress when mp3 is loaded
 - write tests
+- update lib/task/import_words.rake 

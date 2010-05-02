@@ -31,8 +31,10 @@ var initWaveform = function() {
 
 var callback = function(event) {
   //alert(waveformApp.get("sStart")+":"+waveformApp.get("sEnd"));
-  $("form input#word_fragment_start").val(waveformApp.get("sStart"));
-  $("form input#word_fragment_stop").val(waveformApp.get("sEnd"));
+  start = waveformApp.getSelectionTimes()[0];
+  stop = waveformApp.getSelectionTimes()[1];
+  $("form input#word_fragment_start").val(start);
+  $("form input#word_fragment_stop").val(stop);
 }
 
 var addWord = function(word_id) {

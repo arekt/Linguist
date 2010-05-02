@@ -1,14 +1,3 @@
-// This is working like that:
-// 1. Read sound file,
-// 2. Play file  ( problem we don't finish for all sound loaded )  
-// when sound is playing on each frame we store some data (Array) and times (Array) in Event.ENTER_FRAME -> on EnterFrame
-// 3. when sound reading will finish (Event.SOUND_COMPLETE) -> onPlaybackComplete
-// we remove SOUND_CMPLETE event
-// we remove ENTER_FRAME event
-// we draw plot of sound using data and times arrays
-// ... so each subsequent invoke of snd.play() just play the sound nothing more
-
-
 // I want this working like this 
 
 // load mp3 file
@@ -55,8 +44,8 @@ public class FragmentPlayer extends Sprite {
         private var minPeak:Number = 1;
         private var rangePeak:Number = 0;
         private var numberOfSamples:int = 0;
-        private var sampleWidth:Number = 4; // how big will be 100ms fragment on the screen (px)
-        private var sampleShift:int = 100; // this is index for data and times table that we add all the time
+        private var sampleWidth:Number = 4; // how big will be ~100ms fragment on the screen (px)
+        private var sampleShift:int = 0; // this is index for data and times table that we add all the time
         private var totalLength:Number; // lenght of sound in pixels
         public var sStart:int = 0;
         public var sEnd:int = 0;
@@ -163,15 +152,24 @@ public class FragmentPlayer extends Sprite {
 
         private function startSelection(event:MouseEvent):void {
             sStart = mouseX; //times[int(mouseX/sampleWidth)];
-            drawGraph(graphWidth,graphHeight);
+            drawGraph(graphWidth,graphHeight);   //this is to clean previous selection
         }
         private function endSelection(event:MouseEvent):void {
             sEnd = mouseX; //times[int(mouseX/sampleWidth)];
+            if (sStart>sEnd) {
+                sEnd = sStart;
+                sStart = mouseX;
+            }
+            if (int(sEnd/sampleWidth)+sampleShift >= (times.length))
+            {
+                //sEnd/sampleWidth = times.length - sampleShift-1;
+                sEnd = (times.length - sampleShift-1)*sampleWidth;
+            }
             channel.stop();
             channel = snd.play(times[int(sStart/sampleWidth)+sampleShift]);
             var timeout:int = times[int(sEnd/sampleWidth)] - times[int(sStart/sampleWidth)]; //ms
             setTimeout(channel.stop, timeout);
-            drawGraph(graphWidth,graphHeight,sStart,sEnd,0xffff00);
+            drawGraph(graphWidth,graphHeight,sStart,sEnd+sampleWidth,0xffff00);  // sEnd+sampleWidth just to mark one bar more on the graph
             dispatchEvent(new Event("SELECTION_CHANGED"));
         }
        
@@ -227,7 +225,9 @@ public class FragmentPlayer extends Sprite {
             g.endFill();
         
         }
- 
+        public function getSelectionTimes():Array {
+            return [times[int(sStart/sampleWidth)+sampleShift],times[int(sEnd/sampleWidth)+sampleShift]];
+        } 
         private function drawGraph(width:int,height:int,start:int=0,end:int=-1,color:uint=0xbb0066):void {
             //drawing graph on screen 800x600 using volume information from data:Array
             var g:Graphics = background.graphics;

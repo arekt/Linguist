@@ -2,9 +2,9 @@
   <%=h @word.unit.name %>
 </p>
 <center>
-<% if @fragment %>
+<% if @word.fragment.asset_id %>
   <h1>
-    <%= link_to_function h(@word.content), "play(\'#{@audio.filename}\',#{@fragment.start},#{@fragment.end});" %>
+    <%= link_to_function h(@word.content), "play(\'#{asset_path(@word.fragment.asset)}.mp3\',#{@word.fragment.start},#{@word.fragment.stop});" %>
   </h1>
 <% else %>
   <h1><%= h(@word.content) %></h1>

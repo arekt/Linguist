@@ -4,20 +4,16 @@
 <% form_for @word do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :unit %><br />
-    <%= f.collection_select :unit_id, Unit.all, :id, :name %> <%= link_to "New unit", new_unit_path %>
+    <%= f.label :unit %>
+    <%= f.collection_select :unit_id, Unit.all, :id, :name %> 
+    <%= f.label :lang %>
+    <%= f.select :lang, ['japanese','english','polish'] %>
+    <%= f.label :category %>
+    <%= f.select :category, ['verb','noun','adjective'] %>
   </p>
   <p>
     <%= f.label :content %><br />
     <%= f.text_field :content %>
-  </p>
-  <p>
-    <%= f.label :lang %><br />
-    <%= f.select :lang, ['japanese','english','polish'] %>
-  </p>
-  <p>
-    <%= f.label :category %><br />
-    <%= f.select :category, ['verb','noun','adjective'] %>
   </p>
   <p>
   <div class='translations'>

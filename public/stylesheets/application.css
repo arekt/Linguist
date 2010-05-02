@@ -29,7 +29,6 @@ p#exercise_question {
   height: auto;
 }
 
-
 input {
   background-colour: #303030;
   border-colour: #000
@@ -45,6 +44,11 @@ textarea {
   font-size: 32px;
   width: 100%;
   height: 200px;
+}
+
+textarea#word_translations__content {
+  width: 100%;
+  height: 60px;
 }
 
 #sentence_translation_attributes__content {

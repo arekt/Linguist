@@ -23,10 +23,10 @@ var initWaveform = function() {
 function play(audio_filename,start,end){
   if (arguments.length == 3) {
     var duration = end - start;
-    mp3player.playMP3('/uploads/'+audio_filename,start,duration,'Playing');
+    mp3player.playMP3(audio_filename,start,duration,'Playing');
   }
   else {
-    mp3player.playMP3('/uploads/'+audio_filename,0,0,'Playing');
+    mp3player.playMP3(audio_filename,0,0,'Playing');
   }
 }
 

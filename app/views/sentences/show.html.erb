@@ -1,11 +1,14 @@
-<%= javascript_include_tag "jquery-1.4.1.min","jquery.swfobject.1-0-8","FABridge", "application_word" %>
+<%= javascript_include_tag "jquery-1.4.1.min","jquery.swfobject.1-0-8","FABridge", "application_sentence" %>
+<%= javascript_tag "var SENTENCES = #{@sentences_ids_json}; var CURRENT_SENTENCE = #{@sentence.id.to_json}" %>
+
 <div id='mp3_player'>
 </div>
 
 <%= label_tag "sound", "Sound On" %>
 <%= check_box_tag "sound", 1, :id => 'sound' %>
 
-<div id='sentece'>
+<div id='sentence'>
 <%= render :partial => 'sentence_description' %>
 </div>
+
 

@@ -1,19 +1,17 @@
 <p>
-  <%=h @sentence.source.display_name %>
+  <%=h @sentence.unit.name %>
 </p>
 <center>
-<% if @fragment %>
+<% if @sentence.fragment.asset_id %>
   <h1>
-    <%= link_to_function h(@sentence.content), "play(\'#{@audio.filename}\',#{@fragment.start},#{@fragment.end});" %>
+    <%= link_to_function h(@sentence.content), "play(\'#{asset_path(@sentence.fragment.asset)}.mp3\',#{@sentence.fragment.start},#{@sentence.fragment.stop});" %>
   </h1>
 <% else %>
-  <h1><%= h(@sentence.content).gsub(/$/,'<br>') %></h1>
+  <h1><%= h(@sentence.content) %></h1>
 <% end %>
 <div id='navigation'>
-  <%= button_to_function('previous', "show(\'#{sentence_path(@previous)}\');") if @previous %>
-  <%= button_to_function('previous', "alert('This is first sentence')") unless @previous %>
-  <%= button_to_function('next', "show(\'#{sentence_path(@next)}\');") if @next %>
-  <%= button_to_function('next', "alert('This is already last sentence');") unless @next %>
+  <%= button_to_function('previous', "show_previous();") %>
+  <%= button_to_function('next', "show_next();") %>
 </div>
 </center>
 
@@ -28,5 +26,4 @@
   <%= link_to "Edit", edit_sentence_path(@sentence) %> |
   <%= link_to "Destroy", @sentence, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", sentences_path %> |
-  <%= link_to "New", new_sentence_path %>
 </p>

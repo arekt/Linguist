@@ -34,25 +34,19 @@ class WordsController < ApplicationController
   
   def edit
     @word = Word.find(params[:id])
-    case params[:asset_id] 
-      when "remove"
-        @word.fragment.asset = nil
-      else
-        @asset = Asset.find(params[:asset_id])
-        @word.fragment.asset = @asset
-    end
-     respond_to do |format|
+    @asset = Asset.find(params[:asset_id])
+    @word.fragment.asset = @asset
+     
+    respond_to do |format|
       format.html
       format.js
-     end
+    end
 end
   
   def update
     @word = Word.find(params[:id])
     @asset = Asset.find(params[:asset_id])
-    @asset_words = @asset.unit.words.all('fragment.asset_id' => @asset.id)
-    logger.debug "*** @asset => #{@asset.inspect}"
-    logger.debug "*** @asset_words => #{@asset_words.inspect}"
+    
     respond_to do |format|
         if @word.update_attributes(params[:word])
           flash[:notice] = "Successfully updated word."

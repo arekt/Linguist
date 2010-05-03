@@ -33,23 +33,18 @@ class SentencesController < ApplicationController
   
   def edit
       @sentence = Sentence.find(params[:id])
-    case params[:asset_id] 
-      when "remove"
-        @sentence.fragment.asset = nil
-      else
-        @asset = Asset.find(params[:asset_id])
-        @sentence.fragment.asset = @asset
-    end
-     respond_to do |format|
-      format.html
-      format.js
+      @asset = Asset.find(params[:asset_id])
+      @sentence.fragment.asset = @asset
+     
+      respond_to do |format|
+        format.html
+        format.js
      end
   end
   
   def update
     @sentence = Sentence.find(params[:id])
     @asset = Asset.find(params[:asset_id])
-    @asset_sentences = @asset.unit.sentences.all('fragment.asset_id' => @asset.id)
 
     respond_to do |format|
         if @sentence.update_attributes(params[:sentence])

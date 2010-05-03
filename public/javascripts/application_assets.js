@@ -11,10 +11,8 @@ $(document).ready(function () {
             });
             FABridge.addInitializationCallback( "wform", initWaveform );
 
-            $("form.edit_word").live('submit',function(){
+            $("#updateForm>form").live('submit',function(){
               $.post($(this).attr('action'), $(this).serialize(), null, "script");
-              alert('update');
-              
             return false;
             });
 
@@ -45,20 +43,14 @@ var addWord = function(word_id) {
   return false;
 }
 
-var removeWord = function(word_id) {
-  $.get("/assets/remove/words/"+word_id+"/edit", null, null, "script");
-  return false;
-}
-
 var addSentence = function(sentence_id) {
   $.get("/assets/"+asset_id+"/sentences/"+sentence_id+"/edit", null, null, "script");
   return false;
 }
 
-var removeSentence = function(sentence_id) {
-  $.get("/assets/remove/sentences/"+sentence_id+"/edit", null, null, "script");
+var removeFromAsset = function() {
+  var form = $("#updateForm>form");
+  $('#asset_id > input').val('');
+  form.trigger('submit');
   return false;
 }
-
-
-

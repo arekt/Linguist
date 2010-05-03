@@ -1,6 +1,7 @@
 class AssetsController < ApplicationController
   def index
-    @assets = Asset.all
+    @unit = Unit.find(session[:unit_id]) || Unit.first
+    @assets = @unit.assets
   end
   
   def show
@@ -31,7 +32,6 @@ class AssetsController < ApplicationController
   
   def edit
     @asset = Asset.find(params[:id])
-    @asset_words = @asset.unit.words.all('fragment.asset_id' => @asset.id)
   end
   
   def update

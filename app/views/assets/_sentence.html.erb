@@ -5,10 +5,12 @@
   <%= af.text_field :start %>
   <%= af.label :stop %>
   <%= af.text_field :stop %>
+  <div id="asset_id">
   <%= af.label :asset_id %>
   <%= af.text_field :asset_id %>
+  </div>
 <% end %>
 <%= f.submit "Submit" %>
-<%= button_to_function "cancel", "$('#sentence_form').html('')" %>
-<%= button_to_function "remove", "removeSentence(\'#{@sentence.id}\')" %>
+<%= button_to_function "cancel", "$('#updateForm').html('')" %>
+<%= button_to_function "remove", "removeFromAsset()" %>
 <% end %>

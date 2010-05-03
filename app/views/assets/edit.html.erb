@@ -16,24 +16,21 @@
 
 <div id="fragment_player"></div>
 <div id="asset_words">
-  <%= render :partial => 'asset_word', :collection => @asset_words %>
+  <%= render :partial => 'asset_word', :collection => @asset.words %>
 </div>
 <div id="asset_sentences">
-  <%= render :partial => 'asset_sentence', :collection => @asset_sentences %>
+  <%= render :partial => 'asset_sentence', :collection => @asset.sentences %>
 </div>
 
-<%= collection_select :word, :id, @asset.unit.words.without_asset, :id, :content %>
-<%= button_to_function "Add word", "addWord($('select#word_id').val())" %>
-
-<%= collection_select :sentence, :id, @asset.unit.sentences.without_asset, :id, :content %>
-<%= button_to_function "Add sentence", "addSentence($('select#sentence_id').val())" %>
-
-<div id="word_form">
+<div id="words_without_asset">
+<%= render :partial => 'words_without_asset' %>
+</div>
+<div id="sentences_without_asset">
+<%= render :partial => 'sentences_without_asset' %>
 </div>
 
-<div id="sentence_form">
+<div id="updateForm">
 </div>
-
 
 <p>
   <%= link_to "Show", @asset %> |

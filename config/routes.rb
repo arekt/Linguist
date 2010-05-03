@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :exercises  
   map.resources :sentences
   map.resources :dialogs
-  map.resources :assets, :has_many => :words, :has_many => :sentences
+  map.resources :assets, :has_many => [ :words,:sentences]
 
   map.root :controller => "units"
 end

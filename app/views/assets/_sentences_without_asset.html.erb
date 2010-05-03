@@ -1,0 +1,2 @@
+<%= collection_select :sentence, :id, @asset.unit.sentences.without_asset, :id, :content %>
+<%= button_to_function "Add sentence", "addSentence($('select#sentence_id').val())" %>

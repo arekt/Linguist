@@ -1,8 +1,9 @@
 class Dsentence 
   include MongoMapper::EmbeddedDocument
 
-  key :content, String
+  key :sentence_id, ObjectId
   key :person, String
-  key :no, Integer
-  
+  key :position, Integer
+
+  belongs_to :sentence
 end

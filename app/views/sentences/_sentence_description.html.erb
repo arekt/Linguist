@@ -2,7 +2,7 @@
   <%=h @sentence.unit.name %>
 </p>
 <center>
-<% if @sentence.fragment.asset_id %>
+<% if @sentence.fragment && @sentence.fragment.asset_id %>
   <h1>
     <%= link_to_function h(@sentence.content), "play(\'#{asset_path(@sentence.fragment.asset)}.mp3\',#{@sentence.fragment.start},#{@sentence.fragment.stop});" %>
   </h1>

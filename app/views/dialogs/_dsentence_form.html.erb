@@ -1,7 +1,8 @@
-<% fields_for 'dialog[dsentences][]', dsentence_form, :index => '' do |f| %>
+<% fields_for 'dialog[dsentences][]', dsentence_form, :index => "" do |f| %>
 <tr class='single_dsentence'>
-  <td><%= f.text_field :no %></td>
+  <td><%= f.text_field :position %></td>
   <td><%= f.text_field :person %></td>
-  <td><%= f.text_area :content %></td><td><%= button_to_function "Remove sentence","remove_dsentence(this)" %></td>
+  <td><%= f.collection_select :sentence_id, @dialog.unit.sentences, :id, :content %></td>
+  <td><%= button_to_function "Remove sentence","remove_dsentence(this)" %></td>
 </tr>
 <% end %>

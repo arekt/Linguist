@@ -1,3 +1,5 @@
+
+
 input#word_fragment_start, input#word_fragment_stop {
 width: 50px;
 }
@@ -86,7 +88,7 @@ textarea#word_translations__content {
   width: 80px;
   height: 20px;
 }
-#dialog_dsentences__no {
+#dialog_dsentences__position {
   width: 20px;
   height: 20px;
 }

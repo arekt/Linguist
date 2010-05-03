@@ -4,6 +4,7 @@ class Word
   key :lang, String
   key :category, String
   key :unit_id, ObjectId, :index => true
+  #key :fragment, Fragment
   timestamps!
 
   many :translations

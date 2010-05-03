@@ -25,7 +25,6 @@ class DialogsController < ApplicationController
   def edit
     @dialog = Dialog.find(params[:id])
     @dsentences = @dialog.dsentences 
-    @dsentences << Dsentence.new
   end
   
   def update

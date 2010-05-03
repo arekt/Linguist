@@ -8,8 +8,8 @@
     <%= f.text_field :title %>
   </p>
   <p>  
-    <%= f.label :source_id %><br />
-    <%= f.collection_select :source_id, Source.all, :id, :display_name %> <%= link_to "New source", new_source_path %>
+    <%= f.label :unit_id %><br />
+    <%= f.collection_select :unit_id, Unit.all, :id, :name %> 
   </p>
   <p> Sentences:
   <table id='dsentences'>
@@ -18,7 +18,7 @@
     <th><%= f.label :person %></th>
     <th><%= f.label :content %></th>
     <tr>
-      <%= render :partial => 'dsentence_form', :collection => @dsentences %>
+      <%= render :partial => 'dsentence_form', :collection => @dialog.dsentences %>
   </table>
       <%= button_to_function "New sentence","insert_dsentence(dsentence_html)" %>
   </p>

@@ -13,8 +13,6 @@ class UnitsController < ApplicationController
   
   def create
     @unit = Unit.new(params[:unit])
-    logger.debug "#### params: #{params[:unit].inspect}"
-    @unit.assets << Asset.new(params[:asset])
     if @unit.save
       flash[:notice] = "Successfully created unit."
       redirect_to @unit
@@ -29,7 +27,6 @@ class UnitsController < ApplicationController
   
   def update
     @unit = Unit.find(params[:id])
-    @unit.assets << Asset.new(params[:asset])
     if @unit.update_attributes(params[:unit])
       flash[:notice] = "Successfully updated unit."
       redirect_to @unit

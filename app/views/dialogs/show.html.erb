@@ -1,6 +1,6 @@
 <% title h @dialog.title %>
 <table>
-<% for dsentence in @dialog.dsentences.sorted -%>
+<% for dsentence in @dialog.dsentences -%>
   <tr class='dialog'>
   <td class='person'><%=h dsentence.person %></td><td class='separator'>:</td>
   <td><%=h(dsentence.sentence.content).gsub("\n",'<br>') %><td>

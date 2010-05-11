@@ -12,7 +12,7 @@ var example_html = \'<strong>Example:</strong>#{escape_javascript h(@exercise.ex
   </div>
  
 <h2>
-<%= h("#{@exercise.source.name} #{@exercise.source.unit} #{@exercise.source.section} ") %>
+<%= h("#{@unit.name}") %>
 </h2>
 
 <%= link_to "show example", "#exercise_example", { :id => "inline" , :title => 'Example' } %>

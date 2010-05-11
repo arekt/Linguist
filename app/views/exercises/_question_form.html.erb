@@ -7,7 +7,7 @@
   </p>
   <p>
     <%= f.label :correct_answer, 'Answer' %><br>
-    <%= f.text_area :correct_answer %><%= button_to_function "Remove question","remove_question(this)" %>
+    <%= f.collection_select :correct_answer, @unit.sentences, :id, :content %><%= button_to_function "Remove question","remove_question(this)" %>
   </p>
 </div>
 <% end %>

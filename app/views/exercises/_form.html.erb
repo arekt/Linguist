@@ -5,7 +5,7 @@
 <% form_for @exercise do |f| %>
   <%= f.error_messages %>
   <p>  
-    <%= f.label :unit_id %><%= f.text_field :unit_id, current_unit %>
+    <%= f.label :unit_id %><%= f.collection_select :unit_id, Unit.all, :id, :name %>
     <%= f.label :example %><%= f.text_area :example %>
   </p>
 

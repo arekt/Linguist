@@ -1,5 +1,6 @@
 class ExercisesController < ApplicationController
   def index
+    @unit = Unit.find(session[:unit_id]) || Unit.first
     @exercises = Exercise.all
   end
   
@@ -26,6 +27,7 @@ class ExercisesController < ApplicationController
   
   def edit
     @exercise = Exercise.find(params[:id])
+    @unit = @exercise.unit
     @questions = @exercise.questions 
   end
   

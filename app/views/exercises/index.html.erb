@@ -2,12 +2,10 @@
 
 <table>
   <tr>
-    <th>Source</th>
     <th>Example</th>
   </tr>
   <% for exercise in @exercises %>
     <tr>
-      <td><%=h exercise.source.display_name %></td>
       <td><%=link_to h(exercise.example), exercise %></td>
     </tr>
   <% end %>

@@ -18,7 +18,9 @@ class SentencesController < ApplicationController
   end
   
   def new
-    @sentence = Sentence.new  
+    @sentence = Sentence.new 
+    @unit = Unit.find(session[:unit_id]) || Unit.first
+    @sentence.unit =  @unit
   end
   
   def create

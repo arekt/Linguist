@@ -4,12 +4,14 @@ class ExercisesController < ApplicationController
   end
   
   def show
+    @unit = Unit.find(session[:unit_id]) || Unit.first
     @exercise = Exercise.find(params[:id])
   end
   
   def new
+    @unit = Unit.find(session[:unit_id]) || Unit.first
     @exercise = Exercise.new
-#    @questions = [ Question.new ]
+    @exercise.unit = @unit
   end
   
   def create
@@ -25,8 +27,6 @@ class ExercisesController < ApplicationController
   def edit
     @exercise = Exercise.find(params[:id])
     @questions = @exercise.questions 
- #  @questions << Question.new
-
   end
   
   def update

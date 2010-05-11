@@ -5,13 +5,8 @@
 <% form_for @exercise do |f| %>
   <%= f.error_messages %>
   <p>  
-    <%= f.label :unit_id %><br />
-    <%= f.text_field :unit_id, current_unit %> 
-  </p>
-
-  <p>
-    <%= f.label :example %><br />
-    <%= f.text_area :example %>
+    <%= f.label :unit_id %><%= f.text_field :unit_id, current_unit %>
+    <%= f.label :example %><%= f.text_area :example %>
   </p>
 
   <p> Questions:

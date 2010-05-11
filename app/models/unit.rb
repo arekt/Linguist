@@ -1,6 +1,7 @@
 class Unit 
   include MongoMapper::Document
   key :name, String
+  key :sentence_categories, Array
 
   many :assets 
   many :words do

@@ -20,6 +20,7 @@ class WordsController < ApplicationController
   
   def new
     @word = Word.new
+    @word.unit = Unit.find(session[:unit_id]) || Unit.first
   end
   
   def create

@@ -4,12 +4,12 @@ class Sentence
   key :lang, String
   key :category, String
   key :unit_id, ObjectId, :index => true
-  key :fragment, Fragment
+  #key :fragment, Fragment
   timestamps!
 
   many :translations
   belongs_to :unit
-  #one :fragment            #TODO: check if I can use key :fragment, Fragment  (I saw somewhere this) 
+  one :fragment            #TODO: check if I can use key :fragment, Fragment  (I saw somewhere this) 
 
   def self.per_page; 10 end
 
@@ -19,5 +19,4 @@ class Sentence
     re = /^.{20}/
     return re.match(content) || content
   end
-
 end

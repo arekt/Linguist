@@ -9,7 +9,7 @@
     <%= f.label :lang %>
     <%= f.select :lang, ['japanese','english','polish'] %>
     <%= f.label :category %>
-    <%= f.select :category, ['verb','noun','adjective'] %>
+    <%= f.select :category, @sentence.unit.sentence_categories %>
   </p>
   <p>
     <%= f.label :content %><br />

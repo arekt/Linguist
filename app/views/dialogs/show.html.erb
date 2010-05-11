@@ -1,9 +1,18 @@
+<%= javascript_include_tag "jquery-1.4.1.min","jquery.swfobject.1-0-8","FABridge", "application_player" %>
+
+<div id='mp3_player'>
+</div>
+
 <% title h @dialog.title %>
 <table>
 <% for dsentence in @dialog.dsentences -%>
   <tr class='dialog'>
   <td class='person'><%=h dsentence.person %></td><td class='separator'>:</td>
-  <td><%=h(dsentence.sentence.content).gsub("\n",'<br>') %><td>
+  <% if dsentence.sentence.fragment.asset %>
+    <td><%= link_to_function h(dsentence.sentence.content).gsub("\n",'<br>'), "play(\'#{asset_path(dsentence.sentence.fragment.asset)}.mp3\',#{dsentence.sentence.fragment.start},#{dsentence.sentence.fragment.stop});" %></td>
+  <% else %>
+    <td><%=h(dsentence.sentence.content).gsub("\n",'<br>') %><td>
+  <% end %>
   </tr>
 <% end %>
 </table>

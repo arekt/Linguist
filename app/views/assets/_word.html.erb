@@ -1,5 +1,12 @@
-<% form_for(@word, :url => asset_word_url(@asset,@word)) do |f|%>
-<%= f.error_messages %>
+<% form_for(@word, :url => (@word.new?)?asset_words_url(@asset):asset_word_url(@asset,@word)) do |f| %>
+  <%= f.error_messages %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.label :unit_id %>
+  <%= f.hidden_field :unit_id %><br>
+ 
+
+
 <% f.fields_for :fragment, @word.fragment do |af| %>
   <%= af.label :start %>
   <%= af.text_field :start %>

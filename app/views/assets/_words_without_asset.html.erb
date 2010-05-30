@@ -1,3 +1,4 @@
 <%= collection_select :word, :id, @asset.unit.words.without_asset, :id, :content %>
 <%= button_to_function "Add word", "addWord($('select#word_id').val())" %>
+<%= button_to_function "New word", "addWord()" %>
 

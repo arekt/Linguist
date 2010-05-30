@@ -21,15 +21,28 @@ class SentencesController < ApplicationController
     @sentence = Sentence.new 
     @unit = Unit.find(session[:unit_id]) || Unit.first
     @sentence.unit =  @unit
+    @sentence.fragment = Fragment.new
+    @asset = Asset.find(params[:asset_id])
+    @sentence.fragment.asset = @asset 
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js  
+    end
   end
   
   def create
     @sentence = Sentence.new(params[:sentence])
-    if @sentence.save
-      flash[:notice] = "Successfully created sentence."
-      redirect_to @sentence
-    else
-      render :action => 'new'
+    @asset = Asset.find(params[:asset_id])
+
+    respond_to do |format|
+      if @sentence.save
+        flash[:notice] = "Successfully created sentence."
+        format.html{redirect_to @sentence}
+        format.js
+      else
+        format.html{render :action => 'new'}
+      end
     end
   end
   

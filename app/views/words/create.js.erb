@@ -1,0 +1,3 @@
+$('#asset_words').html("<%= escape_javascript(render :partial => 'assets/asset_word', :collection => @asset.words, :as => :asset_word) %>")
+$('#words_without_asset').html("<%= escape_javascript(render :partial => 'assets/words_without_asset') %>")
+$('#updateForm').html('')

@@ -13,6 +13,7 @@ $(document).ready(function () {
 
             $("#updateForm>form").live('submit',function(){
               $.post($(this).attr('action'), $(this).serialize(), null, "script");
+              alert($(this).serialize());
             return false;
             });
 
@@ -39,12 +40,20 @@ var callback = function(event) {
 }
 
 var addWord = function(word_id) {
-  $.get("/assets/"+asset_id+"/words/"+word_id+"/edit", null, null, "script");
+  if (word_id != null) {
+  $.get("/assets/"+asset_id+"/words/"+word_id+"/edit", null, null, "script"); }
+  else {
+  $.get("/assets/"+asset_id+"/words/new", null, null, "script");
+  }
   return false;
 }
 
 var addSentence = function(sentence_id) {
-  $.get("/assets/"+asset_id+"/sentences/"+sentence_id+"/edit", null, null, "script");
+  if (sentence_id != null) {
+  $.get("/assets/"+asset_id+"/sentences/"+sentence_id+"/edit", null, null, "script");}
+  else {
+  $.get("/assets/"+asset_id+"/sentences/new", null, null, "script");
+  }
   return false;
 }
 

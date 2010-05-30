@@ -19,17 +19,31 @@ class WordsController < ApplicationController
   end
   
   def new
+    @unit = Unit.find(session[:unit_id]) || Unit.first
     @word = Word.new
-    @word.unit = Unit.find(session[:unit_id]) || Unit.first
-  end
+    @word.unit = @unit
+    @asset = Asset.find(params[:asset_id])
+    @word.fragment = Fragment.new
+    @word.fragment.asset = @asset
+    logger.debug "***new word #{@word.inspect}"
+     respond_to do |format|
+      format.html
+      format.js
+    end
+ end
   
   def create
     @word = Word.new(params[:word])
-    if @word.save
-      flash[:notice] = "Successfully created word."
-      redirect_to @word
-    else
-      render :action => 'new'
+    logger.debug "*** create word #{@word.inspect}"
+    @asset = Asset.find(params[:asset_id])
+    respond_to do |format|
+      if @word.save
+        flash[:notice] = "Successfully created word."
+        format.html{redirect_to @word}
+        format.js
+      else
+        format.html{render :action => 'new'}
+      end
     end
   end
   

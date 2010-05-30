@@ -1,5 +1,11 @@
-<% form_for(@sentence, :url => asset_sentence_url(@asset,@sentence)) do |f|%>
+<% form_for(@sentence, :url => (@sentence.new?)?asset_sentences_url(@asset):asset_sentence_url(@asset,@sentence)) do |f|%>
 <%= f.error_messages %>
+  <%= f.label :content %>
+  <%= f.text_field :content %><br>
+  <%= f.label :unit_id %>
+  <%= f.hidden_field :unit_id %><br>
+ 
+
 <% f.fields_for :fragment, @sentence.fragment do |af| %>
   <%= af.label :start %>
   <%= af.text_field :start %>

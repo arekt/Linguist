@@ -1,4 +1,13 @@
+div#updateForm > form > input#sentence_content {
+  font-size: 12px;
+  width: default;
+}
 
+div#rightPanel, div#leftPanel {
+  display:block;
+  float: left;
+  margin: 10px;
+}
 
 input#word_fragment_start, input#word_fragment_stop {
 width: 50px;

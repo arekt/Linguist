@@ -8,7 +8,7 @@
 <% for dsentence in @dialog.dsentences -%>
   <tr class='dialog'>
   <td class='person'><%=h dsentence.person %></td><td class='separator'>:</td>
-  <% if dsentence.sentence.fragment.asset %>
+  <% unless dsentence.sentence.fragment.asset.nil? %>
     <td><%= link_to_function h(dsentence.sentence.content).gsub("\n",'<br>'), "play(\'#{asset_path(dsentence.sentence.fragment.asset)}.mp3\',#{dsentence.sentence.fragment.start},#{dsentence.sentence.fragment.stop});" %></td>
   <% else %>
     <td><%=h(dsentence.sentence.content).gsub("\n",'<br>') %><td>

@@ -9,6 +9,8 @@ class DialogsController < ApplicationController
   
   def new
     @dialog = Dialog.new
+    @unit = Unit.find(session[:unit_id]) || Unit.first
+    @dialog.unit = @unit
     @dsentences = [ Dsentence.new ]
   end
   

@@ -143,6 +143,7 @@ a:hover {text-decoration: underline; color: red;}
 
 #container {
   width: 75%;
+  min-height: 400px;
   margin: 0 auto;
   background-color: #400;
   padding: 20px 40px;

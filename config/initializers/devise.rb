@@ -2,7 +2,7 @@
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "please-change-me@config-initializers-devise.com"
+  config.mailer_sender = "admin@sujimichi.com"
   
   # Configure the content type of DeviseMailer mails (defaults to text/html")
   # config.mailer_content_type = "text/plain"
@@ -67,7 +67,7 @@ Devise.setup do |config|
   # Load and configure the ORM. Supports :active_record (default), :mongo_mapper
   # (requires mongo_ext installed) and :data_mapper (experimental).
   # require 'devise/orm/mongo_mapper'
-  # config.orm = :mongo_mapper
+  config.orm = :mongo_mapper
 
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "sessions/users/new". It's turned off by default because it's slower if you

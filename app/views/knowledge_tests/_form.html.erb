@@ -1,12 +1,8 @@
-<% form_for @knowledge_test, :builder => MmFormBuilder do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-
- 
+<% semantic_form_for @knowledge_test do |f| %>
+<% f.inputs do %>
+  <%= f.input :title, :label => 'Title' %>
+  <% end %>
   <%= render_embedded @knowledge_test.questions %>
 
-  <p><%= f.submit "Submit" %></p>
+  <%= f.buttons %>
 <% end %>

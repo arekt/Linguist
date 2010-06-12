@@ -1,3 +1,5 @@
-<% fields_for :question, question do |f| %>
-  <%= f.text_field :content %>
+<% semantic_fields_for :question, question do |f| %>
+  <% f.inputs do %>
+  <%= f.input :content, :label => 'Question:' %>
+  <% end %>
 <% end %>

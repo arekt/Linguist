@@ -1,0 +1,17 @@
+<% title "Knowledge Tests" %>
+
+<table>
+  <tr>
+    <th>Title</th>
+  </tr>
+  <% for knowledge_test in @knowledge_tests %>
+    <tr>
+      <td><%=h knowledge_test.title %></td>
+      <td><%= link_to "Show", knowledge_test %></td>
+      <td><%= link_to "Edit", edit_knowledge_test_path(knowledge_test) %></td>
+      <td><%= link_to "Destroy", knowledge_test, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Knowledge Test", new_knowledge_test_path %></p>

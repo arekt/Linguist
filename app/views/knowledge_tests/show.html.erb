@@ -1,0 +1,12 @@
+<% title "Knowledge Test" %>
+
+<p>
+  <strong>Title:</strong>
+  <%=h @knowledge_test.title %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_knowledge_test_path(@knowledge_test) %> |
+  <%= link_to "Destroy", @knowledge_test, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", knowledge_tests_path %>
+</p>

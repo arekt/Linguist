@@ -1,0 +1,12 @@
+<% form_for @knowledge_test, :builder => MmFormBuilder do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+
+ 
+  <%= render_embedded @knowledge_test.questions %>
+
+  <p><%= f.submit "Submit" %></p>
+<% end %>

@@ -1,5 +1,6 @@
-<% semantic_fields_for :question, question do |f| %>
+<% semantic_fields_for "knowledge_test[questions][]", question, :index=>'' do |f| %>
   <% f.inputs do %>
   <%= f.input :content, :label => 'Question:' %>
-  <% end %>
+    <%= render_embedded question.answers %>
+<% end %>
 <% end %>

@@ -51,6 +51,7 @@ class UnitsController < ApplicationController
   def current
    session[:unit_id] = params[:unit][:id]
    @unit = Unit.find(params[:unit][:id])
+   redirect_to words_url   
   end
 
 end

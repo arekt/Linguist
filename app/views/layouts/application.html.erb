@@ -9,18 +9,22 @@
     <%= yield(:head) %>
   </head>
   <body> 
+   <div id="login">
    <% if user_signed_in? %>
    <%= "Hello #{current_user.email}<br>" %>
    <% end %>
-   <div id="container">
-    <div id='unit_selector'>
+   </div>
+   <div id='unit_selector'>
      <% form_tag(current_unit_path, :method => "get") do %>  
         <%= label_tag(:id, "Unit") %>  
-        <%= collection_select :unit, :id, Unit.all, :id, :name %>  
+        <%= collection_select :unit, :id, Unit.all, :id, :name, :default => current_unit || Unit.first %>  
         <%= submit_tag("Set") %> 
      <% end %>  
     </div>
-      <%= link_to "units", units_path %>|
+   <div class='clear'>
+   </div> 
+   <div id="container">
+     <%= link_to "units", units_path %>|
       <%= link_to "words", words_path %>|
       <%= link_to "sentences", sentences_path %>|
       <%= link_to "dialogs", dialogs_path %>|

@@ -1,3 +1,6 @@
+div#login {
+  float:left;
+}
 div#updateForm > form > input#sentence_content {
   font-size: 12px;
   width: default;

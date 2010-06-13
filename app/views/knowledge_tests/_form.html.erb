@@ -1,8 +1,7 @@
 <% semantic_form_for @knowledge_test do |f| %>
-<% f.inputs do %>
+  <% f.inputs :name => 'Test' do %>
   <%= f.input :title, :label => 'Title' %>
-  <% end %>
   <%= render_embedded @knowledge_test.questions %>
-
+  <% end %>
   <%= f.buttons %>
 <% end %>

@@ -119,7 +119,7 @@ tr.dialog td.separator {
 }
 
 body {
-  background-color: #000;
+  background-color: #efefef;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
   color: #AAA;
@@ -128,10 +128,28 @@ body {
 a img {
   border: none;
 }
-
 a {
-  color: #0000FF;
+  color: #0000ff;
 }
+
+
+div.sentence > a {
+  color: #6060ff;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 28px;
+}
+div.word {
+  display: inline;
+}
+div.word > a {
+  color: #6060ff;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 28px;
+  line-height: 2em;
+  background: #a03000;
+  border: 3px solid black;
+}
+
 
 a:link {text-decoration: none}
 a:visited {text-decoration: none}
@@ -144,14 +162,27 @@ a:hover {text-decoration: underline; color: red;}
   overflow: hidden;
 }
 
+#header {
+  background-image: url('/images/sujimichi_background_top.png');
+  width: 1000px;
+  height: 70px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+#bottom {
+  background-image: url('/images/sujimichi_background_bottom.png');
+  width: 1000px;
+  height: 69px;
+  margin: 0 auto;
+}
+
 #container {
-  width: 75%;
+ background-image: url('/images/sujimichi_background_middle.png');
+  width: 920px;
   min-height: 400px;
   margin: 0 auto;
-  background-color: #400;
-  padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
+  padding: 40px;
 }
 
 #flash_notice, #flash_error {

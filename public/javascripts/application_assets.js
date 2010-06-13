@@ -25,6 +25,7 @@ var initWaveform = function() {
     waveformApp.set("y",-27);  //could someone tell we why I need do this ?? probably there is a bug in swfobject
     waveformApp.getRoot().addEventListener("SELECTION_CHANGED", callback);
     waveformApp.load(audio_url);
+    $('#fragment_player').children('#loading').html('');
     return
     };
 

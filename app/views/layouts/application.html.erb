@@ -21,15 +21,12 @@
         <%= submit_tag("Set") %> 
      <% end %>  
     </div>
-   <div class='clear'>
-   </div> 
+
+   <div class='clear'></div> 
+   <div id="header">
+   <%= image_tag "sujimichi.png", :id=>'logo' %>
+  </div>
    <div id="container">
-     <%= link_to "units", units_path %>|
-      <%= link_to "words", words_path %>|
-      <%= link_to "sentences", sentences_path %>|
-      <%= link_to "dialogs", dialogs_path %>|
-      <%= link_to "exercises", exercises_path %>|
-      <%= link_to "assets", assets_path %>
       
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_{name}" %>
@@ -41,5 +38,6 @@
       
       <%= yield %>
     </div>
+    <div id="bottom"></div>
   </body>
 </html>

@@ -1,18 +1,3 @@
-<table>
-  <tr>
-    <th>Content</th>
-    <th>Lang</th>
-    <th>Category</th>
-  </tr>
-  <% for sentence in sentences %>
-    <tr>
-      <td><%=h sentence.content %></td>
-      <td><%=h sentence.lang %></td>
-      <td><%=h sentence.category %></td>
-      <td><%= link_to "Show", sentence %></td>
-      <td><%= link_to "Edit", edit_sentence_path(sentence) %></td>
-      <td><%= link_to "Destroy", sentence, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
-
+<% for sentence in sentences %>
+      <div class='sentence'><%=link_to h(sentence.content), sentence_path(sentence) %></div>
+<% end %>

@@ -1,11 +1,4 @@
-<% title "Words" %>
-
-<div id='search' style='float:right;'>
-<% form_tag(words_path, :method => 'GET') do %>
-<%= text_field_tag :search %>
-<%= submit_tag('Search') %>
-<% end %>
-</div>
+<% title "Words", false %>
 
 <%= render :partial => 'words' %>
 

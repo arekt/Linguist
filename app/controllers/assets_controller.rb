@@ -6,6 +6,7 @@ class AssetsController < ApplicationController
   
   def show
     @asset = Asset.find(params[:id])
+    @unit = @asset.unit
     respond_to do |format|
       format.html
       format.mp3 do 
@@ -32,6 +33,7 @@ class AssetsController < ApplicationController
   
   def edit
     @asset = Asset.find(params[:id])
+    @unit = @asset.unit
   end
   
   def update

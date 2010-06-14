@@ -1,0 +1,10 @@
+<div id='search' style='float:right;'>
+<% form_tag(words_path, :method => 'GET') do %>
+<%= text_field_tag :content %>
+<%= select_tag :category, options_for_select( @unit.word_categories ) %>
+<%= submit_tag('Search') %>
+<% end %>
+</div>
+<div class='clear'></div>
+
+

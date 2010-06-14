@@ -2,13 +2,24 @@ class WordsController < ApplicationController
 
   def index
     @unit = Unit.find(session[:unit_id]) || Unit.first
-    @words = @unit.words.all
+    
+    @search={}
+    if params.has_key?(:category) && params[:category] != ""
+      @search[:category] = params[:category]
+    end
+    if params.has_key?(:content) && params[:content] != ""
+      @search[:content] = Regexp.new(params[:content])
+    end
+    
+    @words = @unit.words.all(@search)
+    session[:search] = @search
   end
   
   def show
+    @search = session[:search] || {}
     @word = Word.find(params[:id])
     @unit = @word.unit
-    @words_ids_json = @unit.words.all.map(&:id).map(&:to_s).to_json
+    @words_ids_json = @unit.words.all(@search).map(&:id).map(&:to_s).to_json
     respond_to do |format|
       format.html # index.html.erb
       format.js  

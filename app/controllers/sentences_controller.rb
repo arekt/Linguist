@@ -2,14 +2,25 @@ class SentencesController < ApplicationController
   
   def index
       @unit = Unit.find(session[:unit_id]) || Unit.first
-      @sentences = @unit.sentences.all
 
+    @search={}
+    if params.has_key?(:category) && params[:category] != ""
+      @search[:category] = params[:category]
+    end
+    if params.has_key?(:content) && params[:content] != ""
+      @search[:content] = Regexp.new(params[:content])
+    end
+
+      @sentences = @unit.sentences.all(@search)
+      session[:search]=@search
   end
   
   def show
+    logger.debug "search : #{session[:search].inspect}"
+    @search=session[:search] || {}
     @sentence = Sentence.find(params[:id])
     @unit = @sentence.unit
-    @sentences_ids_json = @unit.sentences.all.map(&:id).map(&:to_s).to_json
+    @sentences_ids_json = @unit.sentences.all(@search).map(&:id).map(&:to_s).to_json
     
     respond_to do |format|
       format.html # index.html.erb

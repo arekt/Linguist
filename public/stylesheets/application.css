@@ -133,7 +133,7 @@ a {
 }
 
 
-div.sentence > a {
+div.sentence a {
   color: #6060ff;
   font-family: Verdana, Helvetica, Arial;
   font-size: 28px;
@@ -149,7 +149,14 @@ div.word > a {
   background: #a03000;
   border: 3px solid black;
 }
-
+div.sentence > a {
+  color: #6060ff;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 28px;
+  line-height: 2em;
+  background: #a03000;
+  border: 3px solid black;
+}
 
 a:link {text-decoration: none}
 a:visited {text-decoration: none}
@@ -160,6 +167,17 @@ a:hover {text-decoration: underline; color: red;}
   clear: both;
   height: 0;
   overflow: hidden;
+}
+
+#logo {
+  position: relative;
+  float: left;
+  top: -35px;
+  left: -10px;
+}
+
+#menu_navigation {
+  float: left;
 }
 
 #header {

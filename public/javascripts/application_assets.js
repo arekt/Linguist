@@ -16,7 +16,6 @@ $(document).ready(function () {
               alert($(this).serialize());
             return false;
             });
-
 });
 var waveformApp;  
 
@@ -24,10 +23,15 @@ var initWaveform = function() {
     waveformApp = FABridge.wform.root();
     waveformApp.set("y",-27);  //could someone tell we why I need do this ?? probably there is a bug in swfobject
     waveformApp.getRoot().addEventListener("SELECTION_CHANGED", callback);
+    waveformApp.getRoot().addEventListener("GRAPH_READY", graphReady);
     waveformApp.load(audio_url);
-    $('#fragment_player').children('#loading').html('');
+   $('#fragment_player').children('#loading').html('generating graph....');
     return
     };
+
+var graphReady = function() {
+   $('#fragment_player').children('#loading').html('done...');
+};
 
 var callback = function(event) {
   //alert(waveformApp.get("sStart")+":"+waveformApp.get("sEnd"));

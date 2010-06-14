@@ -1,4 +1,10 @@
 <p>
+  <%= link_to "Edit", edit_word_path(@word) %> |
+  <%= link_to "Destroy", @word, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", words_path %> |
+</p>
+
+<p>
   <%=h @word.unit.name %>
 </p>
 <center>
@@ -22,8 +28,4 @@
   </p>
 <% end -%> 
 
-<p>
-  <%= link_to "Edit", edit_word_path(@word) %> |
-  <%= link_to "Destroy", @word, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", words_path %> |
-</p>
+

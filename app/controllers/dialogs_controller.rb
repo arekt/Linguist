@@ -1,10 +1,12 @@
 class DialogsController < ApplicationController
   def index
-    @dialogs = Dialog.all(:order => "created_at")
+    @unit = Unit.find(session[:unit_id]) || Unit.first
+    @dialogs = @unit.dialogs.all
   end
   
   def show
     @dialog = Dialog.find(params[:id])
+    @unit = @dialog.unit
   end
   
   def new
@@ -26,7 +28,8 @@ class DialogsController < ApplicationController
   
   def edit
     @dialog = Dialog.find(params[:id])
-    @dsentences = @dialog.dsentences 
+    @dsentences = @dialog.dsentences
+    @unit = @dialog.unit 
   end
   
   def update

@@ -24,7 +24,16 @@
 
    <div class='clear'></div> 
    <div id="header">
-   <%= image_tag "sujimichi.png", :id=>'logo' %>
+    <div id='logo'>
+      <%= image_tag "sujimichi.png" %>
+    </div>
+    <div id='menu_navigation'>
+      <%= link_to 'words', words_path %>
+      <%= link_to 'sentences', sentences_path %>
+      <%= link_to 'dialogs', dialogs_path %>
+      <%= link_to 'assets', assets_path %>
+    </div>
+    <div class='clear'></div>
   </div>
    <div id="container">
       

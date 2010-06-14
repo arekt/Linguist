@@ -121,7 +121,8 @@ public class FragmentPlayer extends Sprite {
             }
             // snd.extract(sampleData,samplesToRead); // ignore remaining part for now, I guess we could leave without less then 0.1s sound
             rangePeak = maxPeak - minPeak; 
-            trace("You could draw graph here")
+            trace("You could draw graph here");
+            dispatchEvent(new Event("GRAPH_READY"));
             trace("Stage size:"+stage.width+"x"+stage.height);
             channel = snd.play();
             channel.stop();

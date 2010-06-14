@@ -1,8 +1,17 @@
-<% form_for @unit do |f| %>
+<% semantic_form_for @unit do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p><%= f.submit "Submit" %></p>
+  <% f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :word_categories,
+      :collection => ['verb','noun','adj','adv'],
+      :as => :check_boxes
+    %>
+    <%= f.input :sentence_categories, 
+      :as => :check_boxes,
+      :collection => ['grammar pattern','model sentence','exercise','reading practise'] %>
+    <%= f.input :language, 
+      :as => :radio,
+      :collection => ['ja','pl','en','de','cn'] %>
+  <% end %>
+  <%= f.buttons %>
 <% end %>

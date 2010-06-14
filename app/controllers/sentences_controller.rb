@@ -7,10 +7,10 @@ class SentencesController < ApplicationController
   end
   
   def show
-    @unit = Unit.find(session[:unit_id]) || Unit.first
-    @sentences_ids_json = @unit.sentences.all.map(&:id).map(&:to_s).to_json
     @sentence = Sentence.find(params[:id])
-
+    @unit = @sentence.unit
+    @sentences_ids_json = @unit.sentences.all.map(&:id).map(&:to_s).to_json
+    
     respond_to do |format|
       format.html # index.html.erb
       format.js  
@@ -50,6 +50,7 @@ class SentencesController < ApplicationController
       @sentence = Sentence.find(params[:id])
       @asset = Asset.find(params[:asset_id])
       @sentence.fragment.asset = @asset
+      @unit = @sentence.unit
      
       respond_to do |format|
         format.html

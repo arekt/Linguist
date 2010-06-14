@@ -6,12 +6,9 @@ class WordsController < ApplicationController
   end
   
   def show
-    @unit = Unit.find(session[:unit_id]) || Unit.first
-    @words_ids_json = @unit.words.all.map(&:id).map(&:to_s).to_json
-    
     @word = Word.find(params[:id])
-    #@fragment, @audio = @word.fragment_audio
-  
+    @unit = @word.unit
+    @words_ids_json = @unit.words.all.map(&:id).map(&:to_s).to_json
     respond_to do |format|
       format.html # index.html.erb
       format.js  
@@ -51,6 +48,7 @@ class WordsController < ApplicationController
     @word = Word.find(params[:id])
     @asset = Asset.find(params[:asset_id])
     @word.fragment.asset = @asset
+    @unit = @word.unit
      
     respond_to do |format|
       format.html

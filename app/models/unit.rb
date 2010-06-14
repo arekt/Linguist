@@ -2,7 +2,9 @@ class Unit
   include MongoMapper::Document
   key :name, String
   key :sentence_categories, Array
-
+  key :word_categories, Array
+  key :language, String 
+ 
   many :assets 
   many :words do
     def without_asset
@@ -19,5 +21,5 @@ class Unit
     end
   end
 
-
+  many :dialogs
 end

@@ -3,6 +3,7 @@
 <%= javascript_tag "
   var audio_url =\'#{asset_url(@asset)}.mp3\'
   var asset_id =\'#{@asset.id.to_s}\'
+  var fragments=#{@asset.fragments.to_json};
 " %>
 
 <% title "Edit Asset" %>

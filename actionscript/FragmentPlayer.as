@@ -27,11 +27,13 @@ import flash.net.URLRequest;
 import flash.utils.getTimer;
 import flash.utils.setTimeout;
 import flash.utils.ByteArray;
+import flash.text.TextField;
+import flash.text.TextFormat;
 //import mx.core.UIComponent;
 
 public class FragmentPlayer extends Sprite {
-        private var graphWidth=1024;
-        private var graphHeight=100;
+        private var graphWidth:int=1024;
+        private var graphHeight:int=100;
         private var externalBridge:FABridge;
         private var background_alpha:Number=1;
         private var sampleData:ByteArray;
@@ -58,6 +60,8 @@ public class FragmentPlayer extends Sprite {
         private var beforeBar:Sprite;
         private var afterBar:Sprite;
         private var samplesToRead:Number;
+        private var fragments:Array;
+
 
         public function FragmentPlayer():void {
             super();
@@ -70,6 +74,7 @@ public class FragmentPlayer extends Sprite {
 
             positionBar = new Sprite();
             addChild(positionBar);
+
             beforeBar = new Sprite();
             afterBar = new Sprite();
             positionBar.addChild(beforeBar);
@@ -78,7 +83,43 @@ public class FragmentPlayer extends Sprite {
             afterBar.addEventListener(MouseEvent.MOUSE_DOWN, shiftRight);
             //audio = "assets/4bd5801037a31c7619000007.mp3";
         }
-
+        
+        public function set attachedFragments(arrayOfFragments:Array):void {
+            fragments = arrayOfFragments;
+            for each (var fragment:Object in fragments){
+                var tf:TextField = new TextField();
+                var tfo:TextFormat = new TextFormat();
+                tfo.color = 0xffffff;
+                fragment.textField = tf;
+                tf.defaultTextFormat = tfo;
+                tf.x = 0;
+                tf.y = 0;
+                tf.width = 100;
+                tf.height = 50;
+                tf.text = fragment.content;
+                tf.backgroundColor = 0x000000;
+                tf.background = true;
+                tf.autoSize = "left";
+                addChild(tf);
+                tf.addEventListener(MouseEvent.CLICK, fragmentSelected);    
+                trace('Adding text: '+fragment.content);
+            }
+        }
+        private function fragmentSelected(event:MouseEvent):void {
+            //event.target.background= !event.target.background;
+            for each (var fragment:Object in fragments) {
+                if (fragment.textField === event.target){
+                    trace('Fragment_Selection: '+fragment.start+' '+fragment.end );
+                    var selection:Array = timesToPixels([fragment.start,fragment.end]);
+                    sStart = selection[0]*sampleWidth;
+                    sEnd = selection[1]*sampleWidth;
+                    playSelection();
+                    drawGraph(graphWidth,graphHeight);
+                    drawGraph(graphWidth,graphHeight,sStart,sEnd,0xffff00);  
+                    dispatchEvent(new Event("SELECTION_CHANGED"));
+                }
+            }
+        } 
         public function set backgroundAlpha(value:String):void {
             background_alpha = Number(value);
         }
@@ -134,6 +175,7 @@ public class FragmentPlayer extends Sprite {
             drawGraph(graphWidth,graphHeight);
             trace("Graph ready");
             trace("Stage size:"+stage.width+"x"+stage.height);
+            //attachedFragments = [{content:'Hello',start:10000,end:20000}];
         }
         // this is just to make things easier for javascript
         public function load(url:String):void {
@@ -166,30 +208,35 @@ public class FragmentPlayer extends Sprite {
                 //sEnd/sampleWidth = times.length - sampleShift-1;
                 sEnd = (times.length - sampleShift-1)*sampleWidth;
             }
+            playSelection();
+            drawGraph(graphWidth,graphHeight,sStart,sEnd+sampleWidth,0xffff00);  // sEnd+sampleWidth just to mark one bar more on the graph
+            dispatchEvent(new Event("SELECTION_CHANGED"));
+        }
+
+        private function playSelection():void {
             channel.stop();
             channel = snd.play(times[int(sStart/sampleWidth)+sampleShift]);
             var timeout:int = times[int(sEnd/sampleWidth)] - times[int(sStart/sampleWidth)]; //ms
             setTimeout(channel.stop, timeout);
-            drawGraph(graphWidth,graphHeight,sStart,sEnd+sampleWidth,0xffff00);  // sEnd+sampleWidth just to mark one bar more on the graph
-            dispatchEvent(new Event("SELECTION_CHANGED"));
         }
-       
         private function shiftLeft(event:MouseEvent):void {
            if (sampleShift >=100) {
                 sampleShift = sampleShift - 100;
                  clearGraph(graphWidth,graphHeight);
                  drawGraph(graphWidth,graphHeight);
-           }  
+           } 
+        trace("Window times:"+getWindowTimes()[0]+' '+getWindowTimes()[1]);
         }
         private function shiftRight(event:MouseEvent):void {
-           if (sampleShift <(data.length-100)) {
+           if (sampleShift < (data.length-100)) {
                 sampleShift = sampleShift + 100;
                 clearGraph(graphWidth,graphHeight)
                 drawGraph(graphWidth,graphHeight);
            } 
+        trace("Window times:"+getWindowTimes()[0]+' '+getWindowTimes()[1]);
         }
 
-        private function clearGraph(width:int, height:int){
+        private function clearGraph(width:int, height:int):void{
             var g:Graphics = background.graphics;
                  g.clear();
                  g.beginFill(0xa0a0ff);//,background_alpha);
@@ -202,7 +249,7 @@ public class FragmentPlayer extends Sprite {
             channel.stop();
             channel = snd.play(times[int(mouseX/sampleWidth)+sampleShift]);
         }
-        private function drawPositionBar(width:int,height:int,sampleLength:int){      
+        private function drawPositionBar(width:int,height:int,sampleLength:int):void{      
             var sampleWidth:Number = width/data.length;
             positionBar.y = height; 
             var g:Graphics = positionBar.graphics;
@@ -228,7 +275,29 @@ public class FragmentPlayer extends Sprite {
         }
         public function getSelectionTimes():Array {
             return [times[int(sStart/sampleWidth)+sampleShift],times[int(sEnd/sampleWidth)+sampleShift]];
-        } 
+        }
+        public function getWindowTimes():Array {
+            var windowStart:int = sampleShift;
+            if (windowStart < 0){
+                windowStart = 0
+            }
+
+            var windowEnd:int = sampleShift+int(graphWidth/sampleWidth);
+            if (windowEnd > data.length){
+                windowEnd = data.length-1;
+            }
+            return [times[windowStart],times[windowEnd]];
+        }
+        public function timesToPixels(a:Array):Array {
+            var start:int = 0;
+            var end:int =0;
+            for( var i:int=0;i<times.length;i++){
+                if((times[i] > a[0]) && start == 0) { start = (i - sampleShift); }
+                if(times[i] > a[1] ) { end = (i - sampleShift); break; } 
+            }
+        return [start,end];
+        }
+ 
         private function drawGraph(width:int,height:int,start:int=0,end:int=-1,color:uint=0xbb0066):void {
             //drawing graph on screen 800x600 using volume information from data:Array
             var g:Graphics = background.graphics;
@@ -248,6 +317,22 @@ public class FragmentPlayer extends Sprite {
             if (start == 0) { // when start is != 0 it's mean we draw yellow selection, so don't redraw position bar then.
                 drawPositionBar(width,height,end-start);
             }
+                drawFragments();
         }
+        private function drawFragments():void{
+            var windowTimes:Array = getWindowTimes();
+            for (var i:int=0;i<fragments.length;i++){
+                trace('checking if I can draw '+fragments[i].content);
+                fragments[i].textField.visible = false;
+                if ((fragments[i].start > windowTimes[0]) && (fragments[i].end < windowTimes[1])){
+                    trace('Fragment visible:'+fragments[i].content);
+                    fragments[i].textField.visible = true;
+                    fragments[i].textField.x = sampleWidth*timesToPixels([fragments[i].start,fragments[i].end])[0];
+                    fragments[i].textField.y = 22*(i % 3);
+                }
+            }
+        }
+
+
     }
 }

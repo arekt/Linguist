@@ -21,7 +21,7 @@ var waveformApp;
 
 var initWaveform = function() {
     waveformApp = FABridge.wform.root();
-    waveformApp.set("y",-27);  //could someone tell we why I need do this ?? probably there is a bug in swfobject
+//    waveformApp.set("y",-27);  //could someone tell we why I need do this ?? probably there is a bug in swfobject
     waveformApp.getRoot().addEventListener("SELECTION_CHANGED", callback);
     waveformApp.getRoot().addEventListener("GRAPH_READY", graphReady);
     waveformApp.load(audio_url);
@@ -31,7 +31,13 @@ var initWaveform = function() {
 
 var graphReady = function() {
    $('#fragment_player').children('#loading').html('done...');
+   addFragmentsToGraph();
 };
+
+var addFragmentsToGraph = function() {
+  waveformApp.set('attachedFragments', fragments); 
+};
+
 
 var callback = function(event) {
   //alert(waveformApp.get("sStart")+":"+waveformApp.get("sEnd"));

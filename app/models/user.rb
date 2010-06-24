@@ -5,7 +5,7 @@ class User
 #  devise :registerable, :authenticatable, :recoverable,
 #         :rememberable, :trackable, :validatable
  
-  devise :authenticatable, :recoverable, :rememberable 
+  devise :database_authenticatable, :recoverable, :rememberable 
  
  
   key :email,  String
@@ -32,4 +32,13 @@ class User
 
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation
+ # def self.attr_accessible (*accessible_attributes)
+ #   protected_attributes = accessible_attributes
+ #   accessible_attributes.each do |accesible_attr|
+ #     protected_attributes.delete_if{|k,v| k.to_s == accesible_attr}
+ #   end
+ #   attr_protected protected_attributes
+ # end
+ # 
+ # attr_accessible :email
 end

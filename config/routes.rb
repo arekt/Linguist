@@ -9,5 +9,4 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :assets, :has_many => [ :words,:sentences]
   map.resources :knowledge_tests
   map.root :controller => 'units'
-
 end

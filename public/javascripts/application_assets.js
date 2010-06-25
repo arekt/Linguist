@@ -43,11 +43,23 @@ var callback = function(event) {
   //alert(waveformApp.get("sStart")+":"+waveformApp.get("sEnd"));
   start = waveformApp.getSelectionTimes()[0];
   stop = waveformApp.getSelectionTimes()[1];
-  $("form input#word_fragment_start").val(start);
-  $("form input#word_fragment_stop").val(stop);
-  $("form input#sentence_fragment_start").val(start);
-  $("form input#sentence_fragment_stop").val(stop);
+  fragment = waveformApp.sFragment();
+  
 
+  if (fragment){
+    if (fragment.word){
+      addWord(fragment.id)
+    } else {
+      addSentence(fragment.id)
+    }
+  } 
+  else
+  {
+    $("form input#word_fragment_start").val(start);
+    $("form input#word_fragment_stop").val(stop);
+    $("form input#sentence_fragment_start").val(start);
+    $("form input#sentence_fragment_stop").val(stop);
+  }
 }
 
 var addWord = function(word_id) {

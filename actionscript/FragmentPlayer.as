@@ -51,6 +51,7 @@ public class FragmentPlayer extends Sprite {
         private var totalLength:Number; // lenght of sound in pixels
         public var sStart:int = 0;
         public var sEnd:int = 0;
+        public var selectedFragment:Object;
 
         private var snd:Sound;
         private var req:URLRequest;
@@ -105,6 +106,13 @@ public class FragmentPlayer extends Sprite {
                 trace('Adding text: '+fragment.content);
             }
         }
+
+        public function sFragment():Object {
+            trace('****************');
+            if (selectedFragment) 
+                return {id:selectedFragment.id,word:selectedFragment.word};
+            return null;
+        }
         private function fragmentSelected(event:MouseEvent):void {
             //event.target.background= !event.target.background;
             for each (var fragment:Object in fragments) {
@@ -113,6 +121,7 @@ public class FragmentPlayer extends Sprite {
                     var selection:Array = timesToPixels([fragment.start,fragment.end]);
                     sStart = selection[0]*sampleWidth;
                     sEnd = selection[1]*sampleWidth;
+                    selectedFragment = fragment;
                     playSelection();
                     drawGraph(graphWidth,graphHeight);
                     drawGraph(graphWidth,graphHeight,sStart,sEnd,0xffff00);  
@@ -210,6 +219,7 @@ public class FragmentPlayer extends Sprite {
             }
             playSelection();
             drawGraph(graphWidth,graphHeight,sStart,sEnd+sampleWidth,0xffff00);  // sEnd+sampleWidth just to mark one bar more on the graph
+            selectedFragment = null;
             dispatchEvent(new Event("SELECTION_CHANGED"));
         }
 

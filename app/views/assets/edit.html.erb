@@ -16,15 +16,6 @@
 </div>
 
 <div id="fragment_player"><div id='loading'>Loading data...</div></div>
-<div id="leftPanel">
-  <div id="asset_words">
-  <%= render :partial => 'asset_word', :collection => @asset.words %>
-  </div>
-
-  <div id="asset_sentences">
-  <%= render :partial => 'asset_sentence', :collection => @asset.sentences %>
-  </div>
-</div>
 <div id="rightPanel">
   <div id="words_without_asset">
   <%= render :partial => 'words_without_asset' %>

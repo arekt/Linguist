@@ -86,6 +86,10 @@ public class FragmentPlayer extends Sprite {
         }
         
         public function set attachedFragments(arrayOfFragments:Array):void {
+            for each (var fragment:Object in fragments){
+                fragment.textField.removeEventListener(MouseEvent.CLICK, fragmentSelected);
+                removeChild(fragment.textField);
+            }
             fragments = arrayOfFragments;
             for each (var fragment:Object in fragments){
                 var tf:TextField = new TextField();
@@ -110,7 +114,7 @@ public class FragmentPlayer extends Sprite {
         public function sFragment():Object {
             trace('****************');
             if (selectedFragment) 
-                return {id:selectedFragment.id,word:selectedFragment.word};
+                return {id:selectedFragment.id,text:selectedFragment.textField.text,word:selectedFragment.word};
             return null;
         }
         private function fragmentSelected(event:MouseEvent):void {
@@ -145,7 +149,7 @@ public class FragmentPlayer extends Sprite {
 
             this.graphics.clear();
         }
-        private function onLoadComplete(event:Event):void {
+        private function computeGraph():void{
             var averSV:Number;
             var timePosition:Number = -100;
             samplesToRead = snd.extract(sampleData,4096);
@@ -171,6 +175,10 @@ public class FragmentPlayer extends Sprite {
             }
             // snd.extract(sampleData,samplesToRead); // ignore remaining part for now, I guess we could leave without less then 0.1s sound
             rangePeak = maxPeak - minPeak; 
+        }
+
+        private function onLoadComplete(event:Event):void {
+            computeGraph();
             trace("You could draw graph here");
             dispatchEvent(new Event("GRAPH_READY"));
             trace("Stage size:"+stage.width+"x"+stage.height);
@@ -329,7 +337,7 @@ public class FragmentPlayer extends Sprite {
             }
                 drawFragments();
         }
-        private function drawFragments():void{
+        public function drawFragments():void{
             var windowTimes:Array = getWindowTimes();
             for (var i:int=0;i<fragments.length;i++){
                 trace('checking if I can draw '+fragments[i].content);

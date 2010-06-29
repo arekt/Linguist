@@ -1,4 +1,4 @@
-<%= javascript_include_tag "jquery-1.4.1.min","jquery.swfobject.1-0-8", "FABridge", "application_assets" %>
+<%= javascript_include_tag "jquery","jrails","jquery.swfobject.1-0-8", "FABridge", "application_assets" %>
 
 <%= javascript_tag "
   var audio_url =\'#{asset_url(@asset)}.mp3\'
@@ -16,7 +16,6 @@
 </div>
 
 <div id="fragment_player"><div id='loading'>Loading data...</div></div>
-<div id="rightPanel">
   <div id="words_without_asset">
   <%= render :partial => 'words_without_asset' %>
   </div>
@@ -24,10 +23,15 @@
   <div id="sentences_without_asset">
   <%= render :partial => 'sentences_without_asset' %>
   </div>
-
+  <div id="sentence">
+  </div>  
+  <div id="word">
+  </div>  
   <div id="updateForm">
   </div>
-</div>
+  <div id="ble">
+   bleble
+  </div>
 <div class="clear"></div>
 <p>
   <%= link_to "Show", @asset %> |

@@ -48,7 +48,12 @@ class WordsController < ApplicationController
       if @word.save
         flash[:notice] = "Successfully created word."
         format.html{redirect_to @word}
-        format.js
+        format.js { render :update do |page|
+          page.replace_html 'updateForm', ""
+          page << "waveformApp.set('attachedFragments', #{@asset.fragments.to_json});"
+          page << "waveformApp.drawFragments();"
+        end
+        }
       else
         format.html{render :action => 'new'}
       end
@@ -75,7 +80,13 @@ end
         if @word.update_attributes(params[:word])
           flash[:notice] = "Successfully updated word."
           format.html{redirect_to @word}
-          format.js
+          format.js { render :update do |page|
+            page.replace_html 'updateForm', ""
+            page << "waveformApp.set('attachedFragments', #{@asset.fragments.to_json});"
+            page << "waveformApp.drawFragments();"
+          end
+          }
+ 
         else
           format.html{render :action => 'edit'}
         end
@@ -86,7 +97,15 @@ end
     @word = Word.find(params[:id])
     @word.destroy
     flash[:notice] = "Successfully destroyed word."
-    redirect_to words_url
+    respond_to do |format|
+          format.js { render :update do |page|
+          page.replace_html 'updateForm', ""
+          page << "waveformApp.set('attachedFragments', #{@asset.fragments.to_json});"
+          page << "waveformApp.drawFragments();"
+        end
+        }
+          format.html { redirect_to sentences_url }
+    end
   end
 end
 

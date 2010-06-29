@@ -18,5 +18,9 @@
 <% end %>
 <%= f.submit "Submit" %>
 <%= button_to_function "cancel", "$('#updateForm').html('')" %>
-<%= button_to_function "remove", "removeFromAsset()" %>
+<% unless @sentence.new? %>
+  <% debugger %>
+  <%= link_to_remote "Destroy", :url => { :action => "destroy", :id => @sentence.id }, :confirm => 'Are you sure?', :method => :delete %>
+  <%# link_to "Destroy", @sentence, :confirm => 'Are you sure?', :method => :delete, :ajax_options => {:uninitialized => true} %>
+<% end %>  
 <% end %>

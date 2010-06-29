@@ -52,4 +52,15 @@ class AssetsController < ApplicationController
     flash[:notice] = "Successfully destroyed asset."
     redirect_to assets_url
   end
+
+  def fragments
+    @asset = Asset.find(params[:asset_id])
+    logger.debug "***** asset_id: #{@asset.id} fragments: #{@asset.fragments.inspect}"
+
+    render :update do |page|
+      #page.replace_html  'ble', "hello"
+      page << "fragments = #{@asset.fragments.to_json};"
+      page << "alert(fragments);"
+    end
+  end
 end

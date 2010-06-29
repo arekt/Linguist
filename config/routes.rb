@@ -6,7 +6,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :exercises  
   map.resources :sentences
   map.resources :dialogs
-  map.resources :assets, :has_many => [ :words,:sentences]
+  map.resources :assets, :has_many => [ :words,:sentences] do |asset|
+    asset.fragments "fragments", :action => 'fragments', :controller =>'assets'
+  end
   map.resources :knowledge_tests
   map.root :controller => 'units'
 end

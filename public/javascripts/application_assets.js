@@ -48,9 +48,11 @@ var callback = function(event) {
 
   if (fragment){
     if (fragment.word){
-      addWord(fragment.id)
+      $('#word').html('<h1><a href="#" onclick="addWord(\''+fragment.id+'\')">'+fragment.text+'</a></h1>');
+      $('#sentence').html('');
     } else {
-      addSentence(fragment.id)
+      $('#sentence').html('<h1><a href="#" onclick="addSentence(\''+fragment.id+'\')">'+fragment.text+'</a></h1>');
+      $('#word').html('');
     }
   } 
   else

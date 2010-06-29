@@ -50,7 +50,12 @@ class SentencesController < ApplicationController
       if @sentence.save
         flash[:notice] = "Successfully created sentence."
         format.html{redirect_to @sentence}
-        format.js
+        format.js { render :update do |page|
+          page.replace_html 'updateForm', ""
+          page << "waveformApp.set('attachedFragments', #{@asset.fragments.to_json});"
+          page << "waveformApp.drawFragments();"
+        end
+        }
       else
         format.html{render :action => 'new'}
       end
@@ -77,7 +82,12 @@ class SentencesController < ApplicationController
         if @sentence.update_attributes(params[:sentence])
           flash[:notice] = "Successfully updated sentence."
           format.html{redirect_to @sentence}
-          format.js
+          format.js { render :update do |page|
+            page.replace_html 'updateForm', ""
+            page << "waveformApp.set('attachedFragments', #{@asset.fragments.to_json});"
+            page << "waveformApp.drawFragments();"
+          end
+          }
         else
           format.html{render :action => 'edit'}
         end
@@ -88,6 +98,16 @@ class SentencesController < ApplicationController
     @sentence = Sentence.find(params[:id])
     @sentence.destroy
     flash[:notice] = "Successfully destroyed sentence."
-    redirect_to sentences_url
+    respond_to do |format|
+          format.js { render :update do |page|
+          page.replace_html 'updateForm', ""
+          page << "waveformApp.set('attachedFragments', #{@asset.fragments.to_json});"
+          page << "waveformApp.drawFragments();"
+        end
+        }
+          format.html { redirect_to sentences_url }
+
+    end
+    
   end
 end

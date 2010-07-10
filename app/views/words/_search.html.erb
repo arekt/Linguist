@@ -1,7 +1,8 @@
 <div id='search' style='float:right;'>
 <% form_tag(words_path, :method => 'GET') do %>
-<%= text_field_tag :content %>
-<%= select_tag :category, options_for_select( @unit.word_categories ) %>
+  <%= text_field_tag :content %>
+  <%= select '',:category, options_for_select( @unit.word_categories ), {:include_blank => 'All words'} %>
+  <%= collection_select "", :asset_id, @unit.assets, :id, :file_name, {:include_blank => 'All assets'} %>
 <%= submit_tag('Search') %>
 <% end %>
 </div>

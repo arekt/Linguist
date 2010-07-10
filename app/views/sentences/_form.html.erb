@@ -1,13 +1,34 @@
 <%= javascript_include_tag ['jquery-1.3.2','application'] %>
 <%= javascript_tag "var translation_html=\'#{escape_javascript render :partial => 'translation', :collection => [Translation.new] }\';" %>
   
+
+
+
+#### TODO
+<% if false %>
+<% semantic_form_for @sentence do |f| %>
+  <%= f.error_messages %>
+  <% f.inputs do %>
+    <%= f.input :unit,
+      :collection => Unit.all do |u| [u.id, u.name] end
+    %>
+    <%= f.input :lang, 
+      :collection => @sentence.unit.language,
+      :as => :check_boxes
+    %>
+    <%= f.input :category, 
+      :collection => @sentence.unit.sentence_categories %>
+  <% end %>
+  <%= f.buttons %>
+<% end %>
+<% end %>
+
+
 <% form_for @sentence do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :unit %>
     <%= f.collection_select :unit_id, Unit.all, :id, :name %>
-    <%= f.label :lang %>
-    <%= f.select :lang, ['japanese','english','polish'] %>
     <%= f.label :category %>
     <%= f.select :category, @sentence.unit.sentence_categories %>
   </p>

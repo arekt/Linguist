@@ -1,9 +1,9 @@
 <% semantic_form_for @unit do |f| %>
   <%= f.error_messages %>
-  <% f.inputs do %>
+  <% f.inputs :title => 'ble' do %>
     <%= f.input :name %>
     <%= f.input :word_categories,
-      :collection => ['verb','noun','adj','adv'],
+      :collection => ['noun','verb','adj','adv'],
       :as => :check_boxes
     %>
     <%= f.input :sentence_categories, 

@@ -8,6 +8,7 @@
   <%=h @word.unit.name %>
 </p>
 <center>
+<div id='word'>
 <% if @word.fragment.asset_id %>
   <h1>
     <%= link_to_function h(@word.content), "play(\'#{asset_path(@word.fragment.asset)}.mp3\',#{@word.fragment.start},#{@word.fragment.stop});" %>
@@ -15,6 +16,7 @@
 <% else %>
   <h1><%= h(@word.content) %></h1>
 <% end %>
+</div>
 <div id='navigation'>
   <%= button_to_function('previous', "show_previous();") %>
   <%= button_to_function('next', "show_next();") %>

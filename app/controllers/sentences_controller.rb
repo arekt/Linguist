@@ -4,12 +4,16 @@ class SentencesController < ApplicationController
       @unit = Unit.find(session[:unit_id]) || Unit.first
 
     @search={}
-    if params.has_key?(:category) && params[:category] != ""
-      @search[:category] = params[:category]
+    if params.has_key?(:category) && params[:category].to_s != ""
+      @search[:category] = params[:category].to_s
     end
     if params.has_key?(:content) && params[:content] != ""
       @search[:content] = Regexp.new(params[:content])
     end
+    if params.has_key?(:asset_id) && params[:asset_id].to_s != ""
+      @search['fragment.asset_id'] = BSON::ObjectID.from_string(params[:asset_id].to_s)
+    end
+
 
       @sentences = @unit.sentences.all(@search)
       session[:search]=@search

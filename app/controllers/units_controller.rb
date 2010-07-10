@@ -15,6 +15,8 @@ class UnitsController < ApplicationController
   
   def create
     @unit = Unit.new(params[:unit])
+    params[:unit][:sentence_categories] = params[:unit][:sentence_categories].delete_if {|i| i.empty?}
+    params[:unit][:word_categories] = params[:unit][:word_categories].delete_if {|i| i.empty?}
     if @unit.save
       flash[:notice] = "Successfully created unit."
       redirect_to @unit
@@ -29,6 +31,8 @@ class UnitsController < ApplicationController
   
   def update
     @unit = Unit.find(params[:id])
+    params[:unit][:sentence_categories] = params[:unit][:sentence_categories].delete_if {|i| i.empty?}
+    params[:unit][:word_categories] = params[:unit][:word_categories].delete_if {|i| i.empty?}
     if @unit.update_attributes(params[:unit])
       flash[:notice] = "Successfully updated unit."
       redirect_to @unit

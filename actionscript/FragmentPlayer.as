@@ -66,6 +66,9 @@ public class FragmentPlayer extends Sprite {
 
         public function FragmentPlayer():void {
             super();
+            sampleData = new ByteArray();
+            times = new Array();
+            data = new Array();
             externalBridge = new FABridge();
             externalBridge.rootObject = this;
             background = new Sprite();
@@ -137,10 +140,7 @@ public class FragmentPlayer extends Sprite {
             background_alpha = Number(value);
         }
         public function set audio(file:String):void {
-            sampleData = new ByteArray();
-            times = new Array();
-            data = new Array();
-            req = new URLRequest(file);
+           req = new URLRequest(file);
             snd = new Sound();
             snd.load(req);
             //snd.extract(bytes, 4096); // test
@@ -149,6 +149,26 @@ public class FragmentPlayer extends Sprite {
 
             this.graphics.clear();
         }
+        public function set graphData(dataObject:Object):void {
+            // we expect here dataObject with attr data=[],times=[],rangePeak=Number
+            trace('+++++++++++++ here I set data ... data.length:'+ data.length);
+            if (dataObject != null){ 
+                rangePeak = dataObject.rangePeak;
+                data  = dataObject.data;
+                times = dataObject.times;
+            };
+            trace('+++++++++++++ here I set data ... data.length:'+ data.length);
+        }
+
+        public function get graphData():Object {
+            var rObject:Object = new Object();
+            rObject.rangePeak = rangePeak;
+            rObject.data = data;
+            rObject.times = times;
+            return rObject;
+        }
+
+
         private function computeGraph():void{
             var averSV:Number;
             var timePosition:Number = -100;
@@ -175,12 +195,15 @@ public class FragmentPlayer extends Sprite {
             }
             // snd.extract(sampleData,samplesToRead); // ignore remaining part for now, I guess we could leave without less then 0.1s sound
             rangePeak = maxPeak - minPeak; 
+            dispatchEvent(new Event("GRAPH_READY"));
         }
 
         private function onLoadComplete(event:Event):void {
-            computeGraph();
+            trace( 'data.length:'+data.length);
+            if (data.length == 0) {
+                computeGraph();
+            }
             trace("You could draw graph here");
-            dispatchEvent(new Event("GRAPH_READY"));
             trace("Stage size:"+stage.width+"x"+stage.height);
             channel = snd.play();
             channel.stop();
@@ -190,7 +213,6 @@ public class FragmentPlayer extends Sprite {
             g.drawRect(0,0,graphWidth,graphHeight);
             g.endFill();
             drawGraph(graphWidth,graphHeight);
-            trace("Graph ready");
             trace("Stage size:"+stage.width+"x"+stage.height);
             //attachedFragments = [{content:'Hello',start:10000,end:20000}];
         }

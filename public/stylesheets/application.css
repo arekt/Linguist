@@ -3,6 +3,12 @@ div#sentence > h1 > a {
   border-color: #000
   color: #fff;
 }
+div#word > h1 > a {
+  background-color: #303030;
+  border-color: #000
+  color: #fff;
+}
+
 
 div#login {
   float:left;

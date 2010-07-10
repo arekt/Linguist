@@ -17,5 +17,4 @@ module ApplicationHelper
       "<div class=\"#{class_name}\"> #{form_html} </div>"
     end   
   end
-
 end

@@ -13,7 +13,7 @@ $(document).ready(function () {
 
             $("#updateForm>form").live('submit',function(){
               $.post($(this).attr('action'), $(this).serialize(), null, "script");
-              alert($(this).serialize());
+            //  alert($(this).serialize());
             return false;
             });
 });
@@ -36,7 +36,7 @@ var graphReady = function() {
    $('#fragment_player').children('#loading').html('done...');
    addFragmentsToGraph();
    gd = waveformApp.get('graphData');
-   alert(gd.data[0]);
+   //alert(gd.data[0]);
 };
 
 var addFragmentsToGraph = function() {

@@ -73,8 +73,8 @@ class SentencesController < ApplicationController
       @unit = @sentence.unit
      
       respond_to do |format|
-        format.html
-        format.js
+        format.html { render :layout => false }
+        format.js { render :layout => false }
      end
   end
   

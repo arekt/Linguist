@@ -57,14 +57,25 @@ function show_next(){
 }
 
 function show_previous(){
+   //update data
   for (var i=1 in SENTENCES){
     if (SENTENCES[i] == CURRENT_SENTENCE) 
       {
         CURRENT_SENTENCE = SENTENCES[i-1];
         show('/sentences/'+CURRENT_SENTENCE);
+        set_edit_button_link(CURRENT_SENTENCE);
         return false;
       }
   }
 }
 
-
+function open_editor(id){
+  $.get("/sentences/"+id+"/edit",function(data){
+    $("#editor").html(data);
+    },null,'data');
+}
+function set_edit_button_link(id){
+ $("input#edit_button").click(function(event){
+    open_editor(id);
+  });
+}

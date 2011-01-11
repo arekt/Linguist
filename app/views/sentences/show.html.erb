@@ -10,5 +10,7 @@
 <div id='sentence'>
 <%= render :partial => 'sentence_description' %>
 </div>
-
+  <%= button_to_function "edit", "open_editor(\'#{@sentence.id}\')", :id=>"edit_button" %> 
+<div id='editor'>
+</div>
 

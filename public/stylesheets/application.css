@@ -69,11 +69,11 @@ textarea {
 #sentence_content {
   font-size: 32px;
   width: 100%;
-  height: 200px;
+  height: 100px;
 }
 
 textarea#word_translations__content {
-  width: 100%;
+  width: 44px;
   height: 60px;
 }
 

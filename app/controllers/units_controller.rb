@@ -56,12 +56,12 @@ class UnitsController < ApplicationController
 
   def words  # summary all words in unit
     @unit = Unit.find(params[:id])
-    @words = @unit.words(:sort => "created_at")
+    @words = @unit.words.sort("created_at").all
     render :layout => "kindle"
   end
   def sentences  # summary all words in unit
     @unit = Unit.find(params[:id])
-    @sentences = @unit.sentences(:sort => "created_at")
+    @sentences = @unit.sentences.sort("created_at").all
     render :layout => "kindle"
   end
 end

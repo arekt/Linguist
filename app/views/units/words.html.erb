@@ -1,11 +1,15 @@
-<h2> Words from: <%= @unit.name %> </h2>
-<div class='3cols'>
+<h2> Words from: <%= @unit.name %> </h2><%= link_to "units", units_path %>
+<div class='col3'>
   <% @words.each do |w| %>
-    <p>
+    <div class='item'>
       <div class='col kanji'><%= w.content %></div>
-      <div class='col'><%=h translation(w,"jp_kana") %></div>
-      <div class='col'><%=h translation(w,"en") %></div>
-      <div class='clear'>
-    </p> 
+      <div class='clear'></div>
+      <div class='translations'>
+        <div class='col translation'><%=h translation(w,"jp_kana") %></div>
+        <div class='col translation'><%=h translation(w,"en") %></div>
+      </div>
+      <div class='clear'></div>
+    </div> 
   <% end %>
 </div>
+<%= @unit.name %> </h2>

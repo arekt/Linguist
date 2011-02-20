@@ -1,0 +1,14 @@
+<h2> Sentences from: <%= @unit.name %> </h2><%= link_to "units", units_path %>
+<div class='col3'>
+  <% @sentences.each do |s| %>
+    <div class='item'>
+      <div class='col kanji'><%= s.content %></div>
+      <div class='translations'>
+        <div class='col translation'><%=h translation(s,"jp_kana") %></div>
+        <div class='col translation'><%=h translation(s,"en") %></div>
+      </div>
+      <div class='clear'></div>
+    </div> 
+  <% end %>
+</div>
+<%= link_to "units", units_path %>

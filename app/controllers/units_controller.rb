@@ -1,7 +1,8 @@
 class UnitsController < ApplicationController
-
+  skip_before_filter :authenticate_user!, :only => [:words, :index, :sentences]
   def index
     @units = Unit.all
+    render :layout=>"kindle"
   end
   
   def show

@@ -7,9 +7,13 @@
   <% for unit in @units %>
     <tr>
       <td><%=h unit.name %></td>
+      <% if current_user %>
       <td><%= link_to "Show", unit %></td>
       <td><%= link_to "Edit", edit_unit_path(unit) %></td>
       <td><%= link_to "Destroy", unit, :confirm => 'Are you sure?', :method => :delete %></td>
+      <% end %>
+      <td><%= link_to "Words", words_unit_path(unit) %></td>
+      <td><%= link_to "Sentences", sentences_unit_path(unit) %></td>
     </tr>
   <% end %>
 </table>

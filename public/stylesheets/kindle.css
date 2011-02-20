@@ -1,3 +1,6 @@
 .kanji { font-size: 32px }
-div.col { width:200px; float: left; margin-top: 20px; }
+div.item { border: 1px solid #000; margin: 10px; max-width:600px } 
+div.col { min-width:200px; max-width:600px; float: left; margin-top: 20px; }
 div.clear { clear: both }
+div.hidden { display:none }
+div.translations { min-height: 50px }

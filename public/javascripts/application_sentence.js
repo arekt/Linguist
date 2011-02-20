@@ -50,10 +50,12 @@ function show_next(){
     if (SENTENCES[i-1] == CURRENT_SENTENCE) 
       {
         CURRENT_SENTENCE = SENTENCES[i];
-        show('/sentences/'+CURRENT_SENTENCE);
-        return false;
+        break;
       }
-  }
+    }
+        show('/sentences/'+CURRENT_SENTENCE);
+        $("#editor").html("");
+        return false;
 }
 
 function show_previous(){
@@ -62,20 +64,23 @@ function show_previous(){
     if (SENTENCES[i] == CURRENT_SENTENCE) 
       {
         CURRENT_SENTENCE = SENTENCES[i-1];
-        show('/sentences/'+CURRENT_SENTENCE);
-        set_edit_button_link(CURRENT_SENTENCE);
-        return false;
+        break;
       }
   }
-}
+        show('/sentences/'+CURRENT_SENTENCE);
+ //       set_edit_button_link(CURRENT_SENTENCE);
+        $("#editor").html("");
+        return false;
+ }
 
-function open_editor(id){
+function open_editor(){
+  id=CURRENT_SENTENCE
   $.get("/sentences/"+id+"/edit",function(data){
     $("#editor").html(data);
     },null,'data');
 }
-function set_edit_button_link(id){
- $("input#edit_button").click(function(event){
-    open_editor(id);
-  });
-}
+//function set_edit_button_link(id){
+// $("input#edit_button").click(function(event){
+//    open_editor(id);
+//  });
+//}

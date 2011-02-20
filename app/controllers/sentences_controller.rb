@@ -3,7 +3,7 @@ class SentencesController < ApplicationController
   def index
       @unit = Unit.find(session[:unit_id]) || Unit.first
 
-    @search={}
+    @search={:sort => "fragment.start"}
     if params.has_key?(:category) && params[:category].to_s != ""
       @search[:category] = params[:category].to_s
     end
@@ -13,7 +13,6 @@ class SentencesController < ApplicationController
     if params.has_key?(:asset_id) && params[:asset_id].to_s != ""
       @search['fragment.asset_id'] = BSON::ObjectID.from_string(params[:asset_id].to_s)
     end
-
 
       @sentences = @unit.sentences.all(@search)
       session[:search]=@search

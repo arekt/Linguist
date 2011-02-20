@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.devise_for :users
-  map.resources :units, :member => { :current => :get }
+  map.resources :units, :member => { :current => :get, :words => :get, :sentences => :get } 
   map.current_unit 'current_unit', :controller => 'units', :action => 'current'
   map.resources :words
   map.resources :exercises  

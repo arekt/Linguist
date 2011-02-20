@@ -1,0 +1,11 @@
+<h2> Words from: <%= @unit.name %> </h2>
+<div class='3cols'>
+  <% @words.each do |w| %>
+    <p>
+      <div class='col kanji'><%= w.content %></div>
+      <div class='col'><%=h translation(w,"jp_kana") %></div>
+      <div class='col'><%=h translation(w,"en") %></div>
+      <div class='clear'>
+    </p> 
+  <% end %>
+</div>

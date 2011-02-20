@@ -1,6 +1,5 @@
 class UnitsController < ApplicationController
 
-
   def index
     @units = Unit.all
   end
@@ -54,4 +53,14 @@ class UnitsController < ApplicationController
    redirect_to words_url   
   end
 
+  def words  # summary all words in unit
+    @unit = Unit.find(params[:id])
+    @words = @unit.words
+    render :layout => "kindle"
+  end
+  def sentences  # summary all words in unit
+    @unit = Unit.find(params[:id])
+    @sentences = @unit.sentences
+    render :layout => "kindle"
+  end
 end

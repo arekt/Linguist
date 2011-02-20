@@ -267,3 +267,5 @@ a:hover {text-decoration: underline; color: red;}
   font-size: 12px;
   list-style: disc;
 }
+
+div.col { width:200px; float: left }

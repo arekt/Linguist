@@ -1,4 +1,4 @@
-<h2> Words from: <%= @unit.name %> </h2><%= link_to "units", units_path %>
+<h2> Words from: <%= @unit.name %> </h2><%= link_to "units", units_path, :class => "units" %> <%= link_to "sentences", sentences_unit_path(@unit), :class => "sentences" %>
 <div class='col3'>
   <% @words.each do |w| %>
     <div class='item'>

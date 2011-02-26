@@ -13,10 +13,7 @@ class WordsController < ApplicationController
     if params.has_key?(:asset_id) && params[:asset_id].to_s != ""
       @search['fragment.asset_id'] = BSON::ObjectID.from_string(params[:asset_id].to_s)
     end
-
-
-   
-    @words = @unit.words.all(@search)
+    @words = @unit.words.sort("created_at").all(@search)
     session[:search] = @search
   end
   
@@ -24,7 +21,7 @@ class WordsController < ApplicationController
     @search = session[:search] || {}
     @word = Word.find(params[:id])
     @unit = @word.unit
-    @words_ids_json = @unit.words.all(@search).map(&:id).map(&:to_s).to_json
+    @words_ids_json = @unit.words.sort("created_at").all(@search).map(&:id).map(&:to_s).to_json
     respond_to do |format|
       format.html # index.html.erb
       format.js  

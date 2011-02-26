@@ -14,7 +14,7 @@ class SentencesController < ApplicationController
       @search['fragment.asset_id'] = BSON::ObjectID.from_string(params[:asset_id].to_s)
     end
 
-      @sentences = @unit.sentences.all(@search)
+      @sentences = @unit.sentences.sort("created_at").all(@search)
       session[:search]=@search
   end
   
@@ -23,7 +23,7 @@ class SentencesController < ApplicationController
     @search=session[:search] || {}
     @sentence = Sentence.find(params[:id])
     @unit = @sentence.unit
-    @sentences_ids_json = @unit.sentences.all(@search).map(&:id).map(&:to_s).to_json
+    @sentences_ids_json = @unit.sentences.sort("created_at").all(@search).map(&:id).map(&:to_s).to_json
     
     respond_to do |format|
       format.html # index.html.erb

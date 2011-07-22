@@ -10,7 +10,7 @@ namespace :arek_tools do
     JDB=Sequel.connect('mysql://arek:ryzztruskawkami@localhost/japan_latin2')
     JDB.loggers << Logger.new($stdout)
     
-    source = Source.first(:unit =>unit, :section => 'Kotoba')||Source.new(:unit =>unit, :section => 'Kotoba', :name => "Minna no nihongo") 
+    m_unit = Unit.first(:name => "MNN37#{unit}") || Unit.new(:name => "MNN37#{unit}") 
     
     words = JDB[:words].where(:unit => unit)
     words.count
@@ -23,7 +23,7 @@ namespace :arek_tools do
   
       if !Word.first(:content => new_content)
         translation = Translation.new :content => w[:english], :lang => 'english'
-        word = Word.new :lang => 'japanese', :source => source, :content => new_content, :translations => [translation]
+        word = Word.new :lang => 'japanese', :unit => m_unit, :content => new_content, :translations => [translation]
         puts "Importing :#{new_content}:"
         word.save
       else
